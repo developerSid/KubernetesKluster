@@ -1,0 +1,11 @@
+Vagrant.configure("2") do |config|
+   config.vm.define "kube-master01" do |m|
+      m.vm.box = "file://../VMBuild/boxes/ubuntu-16.04-amd64-libvirt.box"
+      m.vm.hostname = 'kube-master01'
+      m.vm.network :public_network, ip: '192.168.2.201'
+
+      m.vm.provider :libvirt do |v, override|
+         override.vm.synced_folder '', '/vagrant', disabled: true
+      end
+   end
+end
