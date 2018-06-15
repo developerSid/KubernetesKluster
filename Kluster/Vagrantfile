@@ -1,11 +1,53 @@
 Vagrant.configure("2") do |config|
-   config.vm.define "kube-master01" do |m|
-      m.vm.box = "file://../VMBuild/boxes/ubuntu-16.04-amd64-libvirt.box"
-      m.vm.hostname = 'kube-master01'
-      m.vm.network :public_network, ip: '192.168.2.201'
+  config.vm.define "master01" do |m01|
+    m01.vm.box = "file://../VMBuild/builds/virtualbox-ubuntu1604.box"
 
-      m.vm.provider :libvirt do |v, override|
-         override.vm.synced_folder '', '/vagrant', disabled: true
+    m01.ssh.username = "vagrant"
+    m01.ssh.password = "vagrant"
+    m01.vm.network "private_network", ip: "192.168.50.10"
+
+    m01.vm.provider "virtualbox" do |v|
+      v.cpus = 1
+      v.memory = 1024
+      v.name = "kube-master01.vagrant.example"
+      v.gui = false
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+    end
+  end
+
+  config.vm.define "master02" do |m02|
+      m02.vm.box = "file://../VMBuild/builds/virtualbox-ubuntu1604.box"
+
+      m02.ssh.username = "vagrant"
+      m02.ssh.password = "vagrant"
+      m02.vm.network "private_network", ip: "192.168.50.11"
+
+      m02.vm.provider "virtualbox" do |v|
+        v.cpus = 1
+        v.memory = 1024
+        v.name = "kube-master02.vagrant.example"
+        v.gui = false
+        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        v.customize ["modifyvm", :id, "--ioapic", "on"]
       end
-   end
+  end
+
+  config.vm.define "master03" do |m03|
+      m03.vm.box = "file://../VMBuild/builds/virtualbox-ubuntu1604.box"
+
+      m03.ssh.username = "vagrant"
+      m03.ssh.password = "vagrant"
+      m03.vm.network "private_network", ip: "192.168.50.12"
+
+      m03.vm.provider "virtualbox" do |v|
+        v.cpus = 1
+        v.memory = 1024
+        v.name = "kube-master03.vagrant.example"
+        v.gui = false
+        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        v.customize ["modifyvm", :id, "--ioapic", "on"]
+      end
+  end
+
 end

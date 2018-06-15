@@ -1,0 +1,23 @@
+{
+  "CN": "vagrant.example",
+  "hosts": [
+    "kube-master01.vagrant.example",
+    "192.168.50.10",
+    "kube-master02.vagrant.example",
+    "192.168.50.11",
+    "kube-master03.vagrant.example",
+    "192.168.50.12"
+  ],
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "names": [
+    {
+      "C": "US",
+      "ST": "CA",
+      "L": "San Francisco"
+    }
+  ]
+}
+
