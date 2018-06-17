@@ -17,18 +17,37 @@ has been built is some other way with the inventory updated appropriately)
    1. `vagrant ssh master01`
    1. `/opt/etcd/etcd-${etcdVer}-linux-amd64/etcdctl/etcdctl member list`
       1 ${etcdVer} can be found for the vagrant based cluster in the _Provision/group_vars/vagrant_
-      1. Example
-         1. ```bash
+      1. Examples
+         1. List the members of the cluster
+            ```bash
             sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl member list \
               --endpoints=https://127.0.0.1:2379 \
               --cacert=/opt/etcd/ssl/ca.pem \
               --cert=/opt/etcd/ssl/kube-master01.vagrant.example.pem \
               --key=/opt/etcd/ssl/kube-master01.vagrant.example-key.pem
             ```
-         1. ```bash
+         1. List the health of the cluster
+            ```bash
             sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl endpoint --cluster health \
               --endpoints=https://127.0.0.1:2379 \
               --cacert=/opt/etcd/ssl/ca.pem \
               --cert=/opt/etcd/ssl/kube-master01.vagrant.example.pem \
               --key=/opt/etcd/ssl/kube-master01.vagrant.example-key.pem
             ```
+         1. List endpoint status
+            ```bash
+            sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl -w table endpoint status \
+              --endpoints=https://127.0.0.1:2379 \
+              --cacert=/opt/etcd/ssl/ca.pem \
+              --cert=/opt/etcd/ssl/kube-master01.vagrant.example.pem \
+              --key=/opt/etcd/ssl/kube-master01.vagrant.example-key.pem
+            ```
+         1. List cluster status
+            ```bash
+            sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl -w table endpoint --cluster status \
+              --endpoints=https://127.0.0.1:2379 \
+              --cacert=/opt/etcd/ssl/ca.pem \
+              --cert=/opt/etcd/ssl/kube-master01.vagrant.example.pem \
+              --key=/opt/etcd/ssl/kube-master01.vagrant.example-key.pem
+            ```
+              
