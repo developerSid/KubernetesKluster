@@ -1,0 +1,14 @@
+ - name: Ensure group "etcd" exists
+   group:
+     name: etcd
+     state: present
+
+ - name: Create etcd user
+   user:
+    name: etcd
+    state: present
+    groups:
+      - etcd
+    shell: /bin/nologin
+    system: yes
+    createhome: no

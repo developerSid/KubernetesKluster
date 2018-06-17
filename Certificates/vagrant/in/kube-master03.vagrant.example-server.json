@@ -1,12 +1,9 @@
 {
-  "CN": "vagrant.example",
+  "CN": "kube-master03.vagrant.example",
   "hosts": [
-    "kube-master01.vagrant.example",
-    "192.168.50.10",
-    "kube-master02.vagrant.example",
-    "192.168.50.11",
     "kube-master03.vagrant.example",
-    "192.168.50.12"
+    "192.168.50.12",
+    "127.0.0.1"
   ],
   "key": {
     "algo": "rsa",

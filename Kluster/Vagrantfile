@@ -5,6 +5,7 @@ Vagrant.configure("2") do |config|
     m01.ssh.username = "vagrant"
     m01.ssh.password = "vagrant"
     m01.vm.network "private_network", ip: "192.168.50.10"
+    m01.vm.hostname = "master01"
 
     m01.vm.provider "virtualbox" do |v|
       v.cpus = 1
@@ -22,6 +23,7 @@ Vagrant.configure("2") do |config|
       m02.ssh.username = "vagrant"
       m02.ssh.password = "vagrant"
       m02.vm.network "private_network", ip: "192.168.50.11"
+      m02.vm.hostname = "master02"
 
       m02.vm.provider "virtualbox" do |v|
         v.cpus = 1
@@ -39,6 +41,7 @@ Vagrant.configure("2") do |config|
       m03.ssh.username = "vagrant"
       m03.ssh.password = "vagrant"
       m03.vm.network "private_network", ip: "192.168.50.12"
+      m03.vm.hostname = "master03"
 
       m03.vm.provider "virtualbox" do |v|
         v.cpus = 1

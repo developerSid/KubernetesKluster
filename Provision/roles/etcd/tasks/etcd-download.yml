@@ -1,0 +1,5 @@
+- name: Download etcd
+  get_url: url=https://github.com/coreos/etcd/releases/download/{{ etcdVer }}/etcd-{{ etcdVer }}-linux-amd64.tar.gz dest=/tmp/etcd-{{ etcdVer }}-linux-amd64.tar.gz
+
+- name: extract etcd
+  unarchive: src=/tmp/etcd-{{ etcdVer }}-linux-amd64.tar.gz dest=/opt remote_src=yes

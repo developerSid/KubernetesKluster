@@ -1,0 +1,5 @@
+etcdVer: v3.3.7
+clusterName: vagrant
+clusterDomain: vagrant.example
+cidr: 10.32.0.0/24
+kubernetesVer: v1.10.4
