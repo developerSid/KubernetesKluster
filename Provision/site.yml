@@ -6,7 +6,7 @@
 - hosts: etcd
   become: yes
   roles:
-    - { role: etcd, tags: ['etcd'] }
+    - { role: etcd, tags: ['etcd', 'master'] }
 
 - hosts: kube-master
   become: yes

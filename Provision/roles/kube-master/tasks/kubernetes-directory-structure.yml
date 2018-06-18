@@ -1,11 +1,11 @@
 - name: Setup master directory structure
   file:
-    path: /opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/{{ item }}
+    path: /opt/kubernetes/{{ item }}
     state: directory
     mode: 0755
     owner: kubernetes
     group: kubernetes
   with_items:
-    - bin
+    - kubernetes-{{ kubernetesVer }}-linux-amd64
     - log
     - ssl

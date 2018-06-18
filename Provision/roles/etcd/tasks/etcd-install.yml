@@ -1,7 +1,6 @@
 - name: upload certs
   copy: src=../../../../Certificates/{{ clusterName }}/out/{{ item }} dest=/opt/etcd/ssl owner=etcd group=etcd mode=0600
   with_items:
-    - "{{ inventory_hostname }}.{{ clusterDomain }}.csr"
     - "{{ inventory_hostname }}.{{ clusterDomain }}.pem"
     - "{{ inventory_hostname }}.{{ clusterDomain }}-key.pem"
     - ca.pem
