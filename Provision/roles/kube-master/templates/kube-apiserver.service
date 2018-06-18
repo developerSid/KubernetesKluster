@@ -1,0 +1,28 @@
+[Unit]
+Description=Kubernetes API Server
+Documentation=https://github.com/kubernetes/kubernetes
+
+[Service]
+User=kubernetes
+Group=kubernetes
+ExecStart=/opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/bin/kube-apiserver \
+  --advertise-address={{ ansible_host }} \
+  --audit-log-path=/opt/kubernetes/log \
+  --apiserver-count=3 \
+  --bind-address=0.0.0.0 \
+  --kubelet-https=false \
+  --runtime-config=api/all \
+  --secure-port=0 \
+  --service-cluster-ip-range={{ cidr }} \
+  --service-node-port-range=30000-32767 \
+  --etcd-cafile=/opt/etcd/ssl/ca.pem \
+  --etcd-certfile=/opt/etcd/ssl/{{ inventory_hostname }}.{{ clusterDomain }}.pem \
+  --etcd-keyfile=/opt/etcd/ssl/{{ inventory_hostname }}.{{ clusterDomain }}-key.pem \
+  --etcd-servers={% for host in groups['etcd'] %}http://{{ hostvars[host]['ansible_host'] }}:2379{% if not loop.last %},{% endif %}{% endfor %} \
+  --event-ttl=1h \
+  --v=2
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

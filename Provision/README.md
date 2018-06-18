@@ -8,7 +8,7 @@ Assuming the `vagrant up` command has been issued in the _Kluster_ directory (or
 has been built is some other way with the inventory updated appropriately)
 
 1. Change directory to the _Provsion_ directory
-1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -K -u vagrant --tags=etcd`
+1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -K -u vagrant --tags=etcd` to install etcd
    1. prompts triggered by the `ansible-playbook` command
       1. ssh password: `vagrant`
       1. sudo password: `vagrant`
@@ -50,4 +50,7 @@ has been built is some other way with the inventory updated appropriately)
               --cert=/opt/etcd/ssl/kube-master01.vagrant.example.pem \
               --key=/opt/etcd/ssl/kube-master01.vagrant.example-key.pem
             ```
-              
+1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -K -u vagrant --tags=master` to install the kube-apiserver
+   1. prompts triggered by the `ansible-playbook` command
+      1. ssh password: `vagrant`
+      1. sudo password: `vagrant`

@@ -3,7 +3,7 @@
   roles:
     - { role: etcd, tags: ['etcd'] }
 
-#- hosts: kube-master
-#  become: yes
-#  roles:
-#    - { role: kube-master, tags: ['master'] }
+- hosts: kube-master
+  become: yes
+  roles:
+    - { role: kube-master, tags: ['master'] }

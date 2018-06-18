@@ -1,0 +1,12 @@
+- name: Download kubernetes control plane components
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ kubernetesVer }}/bin/linux/amd64/{{ item }}
+    dest: /opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/bin/{{ item }}
+    owner: kubernetes
+    group: kubernetes
+    mode: 0755
+  with_items:
+    - kube-apiserver
+    - kube-controller-manager
+    - kube-scheduler
+    - kubectl

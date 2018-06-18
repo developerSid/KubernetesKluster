@@ -5,7 +5,7 @@ Documentation=https://github.com/coreos
 [Service]
 User=etcd
 Group=etcd
-ExecStart=/opt/etcd-{{ etcdVer }}-linux-amd64/etcd \
+ExecStart=/opt/etcd/etcd-{{ etcdVer }}-linux-amd64/etcd \
   --name {{ inventory_hostname }} \
   --initial-advertise-peer-urls https://{{ ansible_host }}:2380 \
   --listen-peer-urls https://{{ ansible_host }}:2380 \

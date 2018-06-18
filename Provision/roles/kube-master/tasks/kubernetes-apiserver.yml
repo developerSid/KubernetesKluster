@@ -1,0 +1,6 @@
+- name: Deploy Kubernetes API service script
+  template: src=kube-apiserver.service dest=/etc/systemd/system/kube-apiserver.service
+#  notify: reload kube-apiserver
+#
+#- name: Install Kubernetes API service
+#  service: name=kube-apiserver enabled=yes state=started

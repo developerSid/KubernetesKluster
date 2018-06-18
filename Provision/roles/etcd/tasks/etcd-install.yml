@@ -1,9 +1,3 @@
-- name: create etcd directory stucture
-  file: path=/opt/etcd/{{ item }} state=directory owner=etcd group=etcd
-  with_items:
-    - ssl
-    - data
-
 - name: upload certs
   copy: src=../../../../Certificates/{{ clusterName }}/out/{{ item }} dest=/opt/etcd/ssl owner=etcd group=etcd mode=0600
   with_items:
@@ -12,9 +6,6 @@
     - "{{ inventory_hostname }}.{{ clusterDomain }}-key.pem"
     - ca.pem
     - ca-key.pem
-
-- name: extract etcd
-  unarchive: src=/tmp/etcd-{{ etcdVer }}-linux-amd64.tar.gz dest=/opt/etcd/ remote_src=yes
 
 - name: Deploy etcd service unit file
   template: src=etcd.service dest=/etc/systemd/system/etcd.service

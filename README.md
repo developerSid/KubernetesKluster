@@ -21,4 +21,11 @@ To Learn!
 1. [Build Box](./VMBuild/README.md)
 1. [Start Cluster](./Kluster/README.md)
 1. [Generate Certificates](./Certificates/README.md)
-1. [Install Components](./Provision/README.md)  
+1. [Install Components](./Provision/README.md)
+
+
+## Further reading
+* [Kubernetes Cluster Step by Step](https://icicimov.github.io/blog/kubernetes/Kubernetes-cluster-step-by-step/)
+  * need to look into the keepalived and haproxy setup for the api server
+    * will want ot run keepalived and haproxy on each node with the VIP that can bounce between
+      each node
