@@ -28,6 +28,15 @@
           "server auth",
           "client auth"
         ]
+      },
+      "kubernetes": {
+        "expiry": "43800h",
+        "usages": [
+          "signing",
+          "key encipherment",
+          "server auth",
+          "client auth"
+        ]
       }
     }
   }

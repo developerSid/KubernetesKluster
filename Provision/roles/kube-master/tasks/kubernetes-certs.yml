@@ -5,3 +5,5 @@
     - "{{ inventory_hostname }}.{{ clusterDomain }}-key.pem"
     - ca.pem
     - ca-key.pem
+    - service-account.pem
+    - service-account-key.pem
