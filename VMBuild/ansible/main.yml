@@ -14,3 +14,5 @@
         - wget
         - curl
         - vim
+        - tree
+        - htop

@@ -1,6 +1,11 @@
 - hosts: all
   become: yes
   roles:
+    - { role: bootstrap, tags: ['bootstrap'] }
+
+- hosts: etcd
+  become: yes
+  roles:
     - { role: etcd, tags: ['etcd'] }
 
 - hosts: kube-master
