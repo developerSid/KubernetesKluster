@@ -1,5 +1,5 @@
 {
-  "CN": "service-accounts",
+  "CN": "system:kube-controller-manager",
   "key": {
     "algo": "rsa",
     "size": 2048
@@ -9,7 +9,7 @@
       "C": "US",
       "ST": "CA",
       "L": "San Francisco",
-      "O": "Kubernetes for cheapskates",
+      "O": "system:kube-controller-manager",
       "OU": "kube-vagrant"
     }
   ]

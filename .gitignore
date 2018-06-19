@@ -90,3 +90,4 @@ output-*/
 VMBuild/builds/
 *.csr
 *.pem
+*.kubeconfig

@@ -9,7 +9,8 @@
       "C": "US",
       "ST": "CA",
       "L": "San Francisco",
-      "O": "Your Company Name Goes here"
+      "O": "Kubernetes for cheapskates",
+      "OU": "kube-vagrant"
     }
   ]
 }

@@ -5,19 +5,11 @@
     },
     "profiles": {
       "server": {
-        "expiry": "43800h",
+        "expiry": "438000h",
         "usages": [
           "signing",
           "key encipherment",
           "server auth"
-        ]
-      },
-      "client": {
-        "expiry": "43800h",
-        "usages": [
-          "signing",
-          "key encipherment",
-          "client auth"
         ]
       },
       "peer": {

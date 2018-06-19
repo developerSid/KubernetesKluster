@@ -21,16 +21,10 @@ All the certificates and keys used throughout this setup will use the CA generat
       1. Will result in
          * ca.csr - this is not used anywhere according to the etcd documentation
          * ca.pem
-         * ca-key.pem 
-1. Will need to update the _ca-csr.json_ with your locality's information
-1. Generate server certificates
-   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=server server.json | cfssljson -bare server`
-       1. Will Result in
-          * server.csr
-          * server.pem
-          * server-key.pem
+         * ca-key.pem
 
 ### Create the peer certificates using the newly created CA
+1. Will need to update the _ca-csr.json_ with your locality's information
 1. Generate peer certificates (I believe these steps can simply be expanded for however many hosts make up your control plane)
    1. If you decide to generate your own start with this and edit as necessary
       1. generate defaults
@@ -68,7 +62,19 @@ All the certificates and keys used throughout this setup will use the CA generat
       1. Will Result in
          * service-account.csr
          * service-account.pem
-         * service-account-key.pem 
+         * service-account-key.pem
+1. Generate the kube-controller-manager Key Pair
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/kube-controller-manager-csr.json | cfssljson -bare kube-controller-manager`
+      1. Will Result in
+         * kube-controller-manager.csr
+         * kube-controller-manager.pem
+         * kube-controller-manager-key.pem
+1. Generate the kube-scheduler Key Pair
+   1. `cfssl gencert -ca=ca.pem  -ca-key=ca-key.pem  -config=../in/ca-config.json  -profile=kubernetes ../in/kube-scheduler-csr.json | cfssljson -bare kube-scheduler`
+      1. Will Result in
+         * kube-scheduler.csr
+         * kube-scheduler.pem
+         * kube-scheduler-key.pem
 
 Notes:
 1. [api server certs doc](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#x509-client-certs)

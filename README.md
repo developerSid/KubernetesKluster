@@ -1,4 +1,5 @@
-# Setup a Self Hosted Kubernetes cluster _(for learning)_ 
+# Kubernetes for cheapskates like me
+## Setup a Self Hosted Kubernetes cluster _(for learning)_ 
 
 ## Why?
 To Learn!
@@ -21,6 +22,7 @@ To Learn!
 1. [Build Box](./VMBuild/README.md)
 1. [Start Cluster](./Kluster/README.md)
 1. [Generate Certificates](./Certificates/README.md)
+1. [Generate Kube Configs](./Konfiguration/README.md)
 1. [Install Components](./Provision/README.md)
 
 

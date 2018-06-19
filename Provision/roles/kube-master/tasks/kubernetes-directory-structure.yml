@@ -9,3 +9,4 @@
     - kubernetes-{{ kubernetesVer }}-linux-amd64
     - log
     - ssl
+    - config
