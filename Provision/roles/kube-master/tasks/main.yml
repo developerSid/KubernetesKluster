@@ -1,6 +1,5 @@
 - include: kubernetes-user.yml
 - include: kubernetes-directory-structure.yml
 - include: kubernetes-certs.yml
-- include: kubernetes-master-download.yml
 - include: kubernetes-apiserver.yml
 #- include: kubernetes-controller-manager.yml

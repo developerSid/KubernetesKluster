@@ -24,6 +24,8 @@ All the certificates and keys used throughout this setup will use the CA generat
          * ca-key.pem
 
 ### Create the peer certificates using the newly created CA
+1. Generate the encryption-config.yml for the API server
+   1. `../in/encryption-config.sh`
 1. Will need to update the _ca-csr.json_ with your locality's information
 1. Generate peer certificates (I believe these steps can simply be expanded for however many hosts make up your control plane)
    1. If you decide to generate your own start with this and edit as necessary
@@ -75,6 +77,12 @@ All the certificates and keys used throughout this setup will use the CA generat
          * kube-scheduler.csr
          * kube-scheduler.pem
          * kube-scheduler-key.pem
+1. Geneerate the kube-proxy Key Pair
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/kube-proxy-csr.json | cfssljson -bare kube-proxy`
+      1. Will Result in
+         * kube-proxy.csr
+         * kube-proxy.pem
+         * kube-proxy-key.pem
 
 Notes:
 1. [api server certs doc](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#x509-client-certs)

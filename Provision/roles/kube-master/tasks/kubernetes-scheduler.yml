@@ -6,7 +6,4 @@
     group: kubernetes
     mode: 0755
   with_items:
-    - kube-apiserver
-    - kube-controller-manager
     - kube-scheduler
-    - kubectl

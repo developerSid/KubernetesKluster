@@ -91,3 +91,4 @@ VMBuild/builds/
 *.csr
 *.pem
 *.kubeconfig
+encryption-config.yml

@@ -6,7 +6,7 @@
     owner: kubernetes
     group: kubernetes
   with_items:
-    - kubernetes-{{ kubernetesVer }}-linux-amd64
+    - kubernetes-{{ kubernetesVer }}-linux-amd64/bin
     - log
     - ssl
     - config
