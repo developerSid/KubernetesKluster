@@ -15,5 +15,5 @@
   template: src=kube-controller-manager.service dest=/etc/systemd/system/kube-controller-manager.service
   notify: reload kube-controller-manager
 
-- name: Install Kubernetes API service
+- name: Install Kubernetes Controller Manager Service
   service: name=kube-controller-manager enabled=yes state=started

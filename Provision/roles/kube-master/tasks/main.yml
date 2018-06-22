@@ -3,3 +3,4 @@
 - include: kubernetes-certs.yml
 - include: kubernetes-apiserver.yml
 - include: kubernetes-controller-manager.yml
+- include: kubernetes-scheduler.yml

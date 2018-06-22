@@ -9,5 +9,6 @@
     - kubernetes-{{ kubernetesVer }}-linux-amd64/bin
     - log/kube-apiserver
     - log/kube-controller-manager
+    - log/kube-scheduler
     - ssl
     - config

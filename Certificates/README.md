@@ -77,12 +77,18 @@ All the certificates and keys used throughout this setup will use the CA generat
          * kube-scheduler.csr
          * kube-scheduler.pem
          * kube-scheduler-key.pem
-1. Geneerate the kube-proxy Key Pair
+1. Generate the kube-proxy Key Pair
    1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/kube-proxy-csr.json | cfssljson -bare kube-proxy`
       1. Will Result in
          * kube-proxy.csr
          * kube-proxy.pem
          * kube-proxy-key.pem
+1. Generate the admin Key Pair
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/admin-csr.json | cfssljson -bare admin`
+      1. Will Result in
+         * admin.csr
+         * admin.pem
+         * admin-key.pem
 
 Notes:
 1. [api server certs doc](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#x509-client-certs)

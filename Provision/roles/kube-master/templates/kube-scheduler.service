@@ -3,9 +3,13 @@ Description=Kubernetes Scheduler
 Documentation=https://github.com/kubernetes/kubernetes
 
 [Service]
-ExecStart=/opt/kubernetes-{{ kubernetesVer }}-linux-amd64/bin/kube-scheduler \
-  --leader-elect=true \
-  --master=http://127.0.0.1:8080 \
+User=kubernetes
+Group=kubernetes
+ExecStart=/opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/bin/kube-scheduler \
+  --address={{ ansible_host }} \
+  --config=/opt/kubernetes/config/kube-scheduler.yml \
+  --log-dir=/opt/kubernetes/log/kube-scheduler \
+  --logtostderr=false \
   --v=2
 Restart=on-failure
 RestartSec=5

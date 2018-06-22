@@ -54,3 +54,5 @@ has been built is some other way with the inventory updated appropriately)
    1. prompts triggered by the `ansible-playbook` command
       1. ssh password: `vagrant`
       1. sudo password: `vagrant`
+1. check that the control plane is operational
+   1. `sudo -u kubernetes /opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl get componentstatuses -o=wide --kubeconfig /opt/kubernetes/config/admin.kubeconfig`

@@ -3,6 +3,8 @@
   with_items:
     - "{{ inventory_hostname }}.{{ clusterDomain }}.pem"
     - "{{ inventory_hostname }}.{{ clusterDomain }}-key.pem"
+    - admin.pem
+    - admin-key.pem
     - ca.pem
     - ca-key.pem
     - service-account.pem
