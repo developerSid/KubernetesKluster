@@ -7,6 +7,7 @@
     group: kubernetes
   with_items:
     - kubernetes-{{ kubernetesVer }}-linux-amd64/bin
-    - log
+    - log/kube-apiserver
+    - log/kube-controller-manager
     - ssl
     - config

@@ -2,4 +2,4 @@
 - include: kubernetes-directory-structure.yml
 - include: kubernetes-certs.yml
 - include: kubernetes-apiserver.yml
-#- include: kubernetes-controller-manager.yml
+- include: kubernetes-controller-manager.yml

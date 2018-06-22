@@ -1,5 +1,6 @@
 etcdVer: v3.3.7
 clusterName: vagrant
 clusterDomain: vagrant.example
-cidr: 10.32.0.0/24
+clusterCidr: 10.200.0.0/16
+serviceClusterIpRange: 10.32.0.0/24
 kubernetesVer: v1.10.4

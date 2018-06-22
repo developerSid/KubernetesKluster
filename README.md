@@ -31,3 +31,4 @@ To Learn!
   * need to look into the keepalived and haproxy setup for the api server
     * will want ot run keepalived and haproxy on each node with the VIP that can bounce between
       each node
+* [Kubernetes components explained](https://www.cloudfoundry.org/blog/a-look-into-the-kubernetes-master-components/)

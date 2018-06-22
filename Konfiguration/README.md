@@ -7,9 +7,9 @@
       kubectl config set-cluster kube-vagrant \
         --certificate-authority=../../Certificates/vagrant/out/ca.pem \
         --embed-certs=true \
-        --server=https://127.0.0.1:6443 \
+        --server=http://127.0.0.1:8080 \
         --kubeconfig=kube-controller-manager.kubeconfig
-    
+      #TODO need to get a load balancer setup that proxy https requests to the api server rather than just kube-master01
       kubectl config set-credentials system:kube-controller-manager \
         --client-certificate=../../Certificates/vagrant/out/kube-controller-manager.pem \
         --client-key=../../Certificates/vagrant/out/kube-controller-manager-key.pem \
@@ -30,9 +30,9 @@
       kubectl config set-cluster kube-vagrant \
         --certificate-authority=ca.pem \
         --embed-certs=true \
-        --server=https://127.0.0.1:6443 \
+        --server=https://127.0.0.1:8080 \
         --kubeconfig=kube-scheduler.kubeconfig
-      
+      #TODO need to get a load balancer setup that proxy https requests to the api server rather than just kube-master01
       kubectl config set-credentials system:kube-scheduler \
         --client-certificate=kube-scheduler.pem \
         --client-key=kube-scheduler-key.pem \
