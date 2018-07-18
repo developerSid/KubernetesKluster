@@ -1,0 +1,17 @@
+- name: Download kubernetes API server
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ kubernetesVer }}/bin/linux/amd64/{{ item }}
+    dest: /opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/bin/{{ item }}
+    owner: kubernetes
+    group: kubernetes
+    mode: 0755
+  with_items:
+    - kube-apiserver
+    - kubectl
+
+- name: Deploy Kubernetes API service script
+  template: src=kube-apiserver.service dest=/etc/systemd/system/kube-apiserver.service
+  notify: reload kube-apiserver
+
+- name: Install Kubernetes API service
+  service: name=kube-apiserver enabled=yes state=started

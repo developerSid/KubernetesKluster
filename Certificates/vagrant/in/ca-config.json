@@ -12,7 +12,7 @@
           "server auth"
         ]
       },
-      "peer": {
+      "etcd": {
         "expiry": "43800h",
         "usages": [
           "signing",

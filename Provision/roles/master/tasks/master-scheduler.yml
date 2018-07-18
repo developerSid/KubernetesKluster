@@ -1,0 +1,22 @@
+- name: Download kubernetes scheduler
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/{{ kubernetesVer }}/bin/linux/amd64/{{ item }}
+    dest: /opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/bin/{{ item }}
+    owner: kubernetes
+    group: kubernetes
+    mode: 0755
+  with_items:
+    - kube-scheduler
+
+- name: Deploy Kubernetes Scheduler kubeconfig
+  copy: src=../../../../Konfiguration/{{ clusterName }}/kube-scheduler.kubeconfig dest=/opt/kubernetes/config/ owner=kubernetes group=kubernetes mode=0600
+
+- name: Deploy Kubernetes Scheduler yaml config
+  copy: src=kube-scheduler.yml dest=/opt/kubernetes/config/ owner=kubernetes group=kubernetes mode=0600
+
+- name: Deploy Kubernetes Controller Manager service script
+  template: src=kube-scheduler.service dest=/etc/systemd/system/kube-scheduler.service
+  notify: reload kube-scheduler
+
+- name: Install Kubernetes Scheduler
+  service: name=kube-scheduler enabled=yes state=started

@@ -1,0 +1,28 @@
+- name: upload certs
+  copy: src=../../../../Certificates/{{ clusterName }}/out/{{ item }} dest=/opt/kubernetes/ssl/ owner=kubernetes group=kubernetes mode=0600
+  with_items:
+    - kube-master.{{ clusterDomain }}.pem
+    - kube-master.{{ clusterDomain }}-key.pem
+    - admin.pem
+    - admin-key.pem
+    - ca.pem
+    - ca-key.pem
+    - service-account.pem
+    - service-account-key.pem
+    - encryption-config.yml
+
+- name: upload etcd cert
+  copy:
+    src: "../../../../Certificates/{{ clusterName }}/out/{{ inventory_hostname }}-etcd.{{ clusterDomain }}.pem"
+    dest: "/opt/kubernetes/ssl/{{ inventory_hostname }}.{{ clusterDomain }}-etcd.pem"
+    owner: kubernetes
+    group: kubernetes
+    mode: 0600
+
+- name: upload etcd key
+  copy:
+    src: "../../../../Certificates/{{ clusterName }}/out/{{ inventory_hostname }}-etcd.{{ clusterDomain }}-key.pem"
+    dest: "/opt/kubernetes/ssl/{{ inventory_hostname }}.{{ clusterDomain }}-etcd-key.pem"
+    owner: kubernetes
+    group: kubernetes
+    mode: 0600

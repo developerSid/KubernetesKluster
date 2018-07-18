@@ -1,0 +1,14 @@
+- name: Setup master directory structure
+  file:
+    path: /opt/kubernetes/{{ item }}
+    state: directory
+    mode: 0755
+    owner: kubernetes
+    group: kubernetes
+  with_items:
+    - kubernetes-{{ kubernetesVer }}-linux-amd64/bin
+    - log/kube-apiserver
+    - log/kube-controller-manager
+    - log/kube-scheduler
+    - ssl
+    - config

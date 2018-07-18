@@ -2,7 +2,7 @@
   "CN": "kube-master02.vagrant.example",
   "hosts": [
     "kube-master02.vagrant.example",
-    "192.168.50.11",
+    "192.168.50.12",
     "127.0.0.1"
   ],
   "key": {
