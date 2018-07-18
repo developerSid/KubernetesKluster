@@ -1,0 +1,15 @@
+- name: Ensure group "balancer" exists
+  group:
+    name: balancer
+    state: present
+
+- name: Create kubernetess user
+  user:
+   name: balancer
+   state: present
+   groups:
+     - balancer
+   shell: /bin/nologin
+   system: yes
+   createhome: no
+

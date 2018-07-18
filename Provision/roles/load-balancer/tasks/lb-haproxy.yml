@@ -1,0 +1,12 @@
+- name: upload haproxy config
+  template:
+    src: haproxy.conf
+    dest: /etc/haproxy/haproxy.cfg
+    validate: "/usr/sbin/haproxy -f %s -c"
+  notify: restart haproxy
+
+- name: enable haproxy
+  service:
+    name: haproxy
+    state: started
+    enabled: yes

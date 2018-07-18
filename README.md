@@ -31,4 +31,8 @@ To Learn!
     * will want ot run keepalived and haproxy on each node with the VIP that can bounce between
       each node
 * [Kubernetes components explained](https://www.cloudfoundry.org/blog/a-look-into-the-kubernetes-master-components/)
-* [Kubernetes HA Under X-Ray](https://blog.heptio.com/kubernetes-ha-under-x-ray-5d05f552c9f)
+* [Kubernetes HA Under X-Ray](https://blog.heptio.com/kubernetes-ha-under-x-ray-5d05f552c9f)i
+
+## Cool tricks
+* source <(kubectl completion zsh)
+  * adds zsh completion
