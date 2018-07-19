@@ -29,29 +29,29 @@ All the certificates and keys used throughout this setup will use the CA generat
 1. Will need to update the _ca-csr.json_ with your locality's information
 1. Generate etcd certificates
    1. For the 3 node cluster defined with the vagrant configuration these instructions will generate 3 sets of keys
-   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=etcd ../in/kube-master01-etcd.vagrant.example-server.json | cfssljson -bare kube-master01-etcd.vagrant.example`
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=etcd ../in/master01-etcd.vagrant.example-server.json | cfssljson -bare master01-etcd.vagrant.example`
       1. Generates:
-         * kube-master01.vagrant.example.csr
-         * kube-master01.vagrant.example.pem
-         * kube-master01.vagrant.example-key.pem
-   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=etcd ../in/kube-master02-etcd.vagrant.example-server.json | cfssljson -bare kube-master02-etcd.vagrant.example`
+         * master01.vagrant.example.csr
+         * master01.vagrant.example.pem
+         * master01.vagrant.example-key.pem
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=etcd ../in/master02-etcd.vagrant.example-server.json | cfssljson -bare master02-etcd.vagrant.example`
       1. Generates:
-         * kube-master02.vagrant.example.csr
-         * kube-master02.vagrant.example.pem
-         * kube-master02.vagrant.example-key.pem
-   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=etcd ../in/kube-master03-etcd.vagrant.example-server.json | cfssljson -bare kube-master03-etcd.vagrant.example`
+         * master02.vagrant.example.csr
+         * master02.vagrant.example.pem
+         * master02.vagrant.example-key.pem
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=etcd ../in/master03-etcd.vagrant.example-server.json | cfssljson -bare master03-etcd.vagrant.example`
       1. Generates:
-         * kube-master02.vagrant.example.csr
-         * kube-master02.vagrant.example.pem
-         * kube-master02.vagrant.example-key.pem
+         * master02.vagrant.example.csr
+         * master02.vagrant.example.pem
+         * master02.vagrant.example-key.pem
                  
 ### Create Kubernetes certificates and keys
 1. Generate the shared master certificates
-   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/kube-master.vagrant.example-server.json | cfssljson -bare kube-master.vagrant.example`
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/master.vagrant.example-server.json | cfssljson -bare master.vagrant.example`
       1. Results in
-         * kube-master.vagrant.example.csr
-         * kube-master.vagrant.example.pem
-         * kube-master.vagrant.example-key.pem
+         * master.vagrant.example.csr
+         * master.vagrant.example.pem
+         * master.vagrant.example-key.pem
    1. Notes: 
       1. The hosts section defines the load balancer which will be used as one of the hosts as it will be the entry
          point to the cluster.  This allows for the cluster control plane to be dynamic.

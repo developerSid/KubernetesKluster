@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+rm *.kubeconfig
+
 ### kube-controller-manager
 kubectl config set-cluster kube-vagrant \
    --certificate-authority=../../Certificates/vagrant/out/ca.pem \

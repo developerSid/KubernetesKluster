@@ -5,12 +5,12 @@ Vagrant.configure("2") do |config|
       m.ssh.username = "vagrant"
       m.ssh.password = "vagrant"
       m.vm.network "private_network", ip: "192.168.50.10"
-      m.vm.hostname = "kube-lb01"
+      m.vm.hostname = "lb01"
 
       m.vm.provider "virtualbox" do |v|
         v.cpus = 1
         v.memory = 512
-        v.name = "kube-lb01.vagrant.example"
+        v.name = "lb01.vagrant.example"
         v.gui = false
         v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         v.customize ["modifyvm", :id, "--ioapic", "on"]
@@ -28,7 +28,7 @@ Vagrant.configure("2") do |config|
     m.vm.provider "virtualbox" do |v|
       v.cpus = 1
       v.memory = 1024
-      v.name = "kube-master01.vagrant.example"
+      v.name = "master01.vagrant.example"
       v.gui = false
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--ioapic", "on"]
@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
       m.vm.provider "virtualbox" do |v|
         v.cpus = 1
         v.memory = 1024
-        v.name = "kube-master02.vagrant.example"
+        v.name = "master02.vagrant.example"
         v.gui = false
         v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         v.customize ["modifyvm", :id, "--ioapic", "on"]
@@ -64,7 +64,7 @@ Vagrant.configure("2") do |config|
       m.vm.provider "virtualbox" do |v|
         v.cpus = 1
         v.memory = 1024
-        v.name = "kube-master03.vagrant.example"
+        v.name = "master03.vagrant.example"
         v.gui = false
         v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         v.customize ["modifyvm", :id, "--ioapic", "on"]

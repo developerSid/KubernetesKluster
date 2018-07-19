@@ -1,5 +1,5 @@
 {
-  "CN": "kube-master01.vagrant.example",
+  "CN": "master01.vagrant.example",
   "hosts": [
     "192.168.50.10",
     "127.0.0.1",
