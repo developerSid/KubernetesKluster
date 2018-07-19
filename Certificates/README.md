@@ -123,6 +123,7 @@ been created.  To create more just add more _worker*-csr.json_ files.
          * worker02.csr
          * worker02.pem
          * worker02-key.pem
+1. Very important note the O in the workerX-csr.json needs to be *"O": "system:nodes",*
          
 Notes:
 1. [api server certs doc](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#x509-client-certs)

@@ -72,3 +72,49 @@ has been built is some other way with the inventory updated appropriately)
 1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -u vagrant --tags=worker` to install all the components for the worker machines
    1. prompts triggered by the `ansible-playbook` command
       1. ssh password: `vagrant`
+1. Need to configure the node's access.  Change directory to the Kluster directory and execute `vagrant ssh master01`
+   1. execute 
+```bash
+sudo -u kubernetes cat <<EOF | sudo -u kubernetes /opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl apply --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig -f -
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  labels:
+    kubernetes.io/bootstrapping: rbac-defaults
+  name: system:kube-apiserver-to-kubelet
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - nodes/proxy
+      - nodes/stats
+      - nodes/log
+      - nodes/spec
+      - nodes/metrics
+    verbs:
+      - "*"
+EOF
+```
+      1. According to Kubernetes the Hard Way this should have the effect of "Create the system:kube-apiserver-to-kubelet 
+         ClusterRole with permissions to access the Kubelet API and perform most common tasks associated with managing pods"
+   1. execute
+```bash
+sudo -u kubernetes cat <<EOF | sudo -u kubernetes /opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl apply --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig -f -
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: system:kube-apiserver
+  namespace: ""
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:kube-apiserver-to-kubelet
+subjects:
+  - apiGroup: rbac.authorization.k8s.io
+    kind: User
+    name: kubernetes
+EOF
+```
+      1. "Bind the system:kube-apiserver-to-kubelet ClusterRole to the kubernetes user"
