@@ -3,7 +3,7 @@
     name: balancer
     state: present
 
-- name: Create kubernetess user
+- name: Create "balancer" user
   user:
    name: balancer
    state: present
