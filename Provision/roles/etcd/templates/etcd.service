@@ -15,10 +15,10 @@ ExecStart=/opt/etcd/etcd-{{ etcdVer }}-linux-amd64/etcd \
   --initial-cluster {% for host in groups['etcd'] %}{{ hostvars[host]['inventory_hostname'] }}=https://{{ hostvars[host]['ansible_host'] }}:2380{% if not loop.last %},{% endif %}{% endfor %} \
   --initial-cluster-state new \
   --data-dir=/opt/etcd/data \
-  --cert-file=/opt/etcd/ssl/{{ inventory_hostname }}.{{ clusterDomain }}.pem \
-  --key-file=/opt/etcd/ssl/{{ inventory_hostname }}.{{ clusterDomain }}-key.pem \
-  --peer-cert-file=/opt/etcd/ssl/{{ inventory_hostname }}.{{ clusterDomain }}.pem \
-  --peer-key-file=/opt/etcd/ssl/{{ inventory_hostname }}.{{ clusterDomain }}-key.pem \
+  --cert-file=/opt/etcd/ssl/{{ inventory_hostname }}-etcd.{{ clusterDomain }}.pem \
+  --key-file=/opt/etcd/ssl/{{ inventory_hostname }}-etcd.{{ clusterDomain }}-key.pem \
+  --peer-cert-file=/opt/etcd/ssl/{{ inventory_hostname }}-etcd.{{ clusterDomain }}.pem \
+  --peer-key-file=/opt/etcd/ssl/{{ inventory_hostname }}-etcd.{{ clusterDomain }}-key.pem \
   --trusted-ca-file=/opt/etcd/ssl/ca.pem \
   --peer-trusted-ca-file=/opt/etcd/ssl/ca.pem \
   --peer-client-cert-auth \

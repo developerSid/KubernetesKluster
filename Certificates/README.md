@@ -27,38 +27,53 @@ All the certificates and keys used throughout this setup will use the CA generat
 1. Generate the encryption-config.yml for the API server
    1. `../in/encryption-config.sh`
 1. Will need to update the _ca-csr.json_ with your locality's information
-1. Generate peer certificates (I believe these steps can simply be expanded for however many hosts make up your control plane)
-   1. If you decide to generate your own start with this and edit as necessary
-      1. generate defaults
-         * `cfssl print-defaults csr > kube-master01.vagrant.example-server.json.json`
-         * `cfssl print-defaults csr > kube-master02.vagrant.example-server.json.json`
-         * `cfssl print-defaults csr > kube-master03.vagrant.example-server.json.json`
-      1. Note on sections
-         1. *hosts* describes the list of host alternative names in the X509 certificate (I think)
-         1. *keys* I'd recommend this
-            ```json
-            "key": {
-                "algo": "rsa",
-                "size": 2048
-              }
-            ```
-   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=peer ../in/kube-master01.vagrant.example-server.json | cfssljson -bare kube-master01.vagrant.example`
+1. Generate etcd certificates
+   1. For the 3 node cluster defined with the vagrant configuration these instructions will generate 3 sets of keys
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=etcd ../in/master01-etcd.vagrant.example-server.json | cfssljson -bare master01-etcd.vagrant.example`
       1. Generates:
-         * kube-master01.vagrant.example.csr
-         * kube-master01.vagrant.example.pem
-         * kube-master01.vagrant.example-key.pem
-   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=peer ../in/kube-master02.vagrant.example-server.json | cfssljson -bare kube-master02.vagrant.example`
+         * master01.vagrant.example.csr
+         * master01.vagrant.example.pem
+         * master01.vagrant.example-key.pem
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=etcd ../in/master02-etcd.vagrant.example-server.json | cfssljson -bare master02-etcd.vagrant.example`
       1. Generates:
-         * kube-master02.vagrant.example.csr
-         * kube-master02.vagrant.example.pem
-         * kube-master02.vagrant.example-key.pem
-   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=peer ../in/kube-master03.vagrant.example-server.json | cfssljson -bare kube-master03.vagrant.example`
+         * master02.vagrant.example.csr
+         * master02.vagrant.example.pem
+         * master02.vagrant.example-key.pem
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=etcd ../in/master03-etcd.vagrant.example-server.json | cfssljson -bare master03-etcd.vagrant.example`
       1. Generates:
-         * kube-master02.vagrant.example.csr
-         * kube-master02.vagrant.example.pem
-         * kube-master02.vagrant.example-key.pem
+         * master02.vagrant.example.csr
+         * master02.vagrant.example.pem
+         * master02.vagrant.example-key.pem
                  
 ### Create Kubernetes certificates and keys
+1. Generate the shared master certificates
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/master.vagrant.example-server.json | cfssljson -bare master.vagrant.example`
+      1. Results in
+         * master.vagrant.example.csr
+         * master.vagrant.example.pem
+         * master.vagrant.example-key.pem
+   1. Notes: 
+      1. The hosts section defines the load balancer which will be used as one of the hosts as it will be the entry
+         point to the cluster.  This allows for the cluster control plane to be dynamic.
+         1. From the Heptio article: <br>
+            _"Kubernetes automatically creates a service named Kubernetes in the default namespaces, 
+            that is kubernetes.default according to the internal DNS notation; this service provides 
+            a well-known, portable, in-cluster way that pods can use to access the APIserver."_
+            
+            _"The Kubernetes Service is assigned the first address in the service address space 
+            defined by --service-cluster-ip-range flag of the kube-apiserver"_ 
+            
+            Based on the IP Addressing scheme borrowed from _Kubernetes the Hard Way_ that address chosen from the
+            _--service-cluster-ip-range_ flag it would be 10.32.0.1 (Note: one of the steps will be setting up HAProxy 
+            on each master node to route requests to that node's api server instance)
+         ```json
+         "hosts": [
+             "192.168.50.10",
+             "127.0.0.1",
+             "10.32.0.1",
+             "kubernetes.default"
+           ]
+         ```
 1. Generate the Service Account Key Pair
    1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/service-account-csr.json | cfssljson -bare service-account`
       1. Will Result in

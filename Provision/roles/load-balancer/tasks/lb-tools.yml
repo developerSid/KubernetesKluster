@@ -1,0 +1,6 @@
+- name: install load balancer tools
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - haproxy

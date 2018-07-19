@@ -20,39 +20,52 @@ has been built is some other way with the inventory updated appropriately)
       1. Examples
          1. List the members of the cluster
             ```bash
-            sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl member list \
-              --endpoints=https://127.0.0.1:2379 \
-              --cacert=/opt/etcd/ssl/ca.pem \
-              --cert=/opt/etcd/ssl/kube-master01.vagrant.example.pem \
-              --key=/opt/etcd/ssl/kube-master01.vagrant.example-key.pem
+               sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl member list \
+                  --endpoints=https://127.0.0.1:2379 \
+                  --cacert=/opt/etcd/ssl/ca.pem \
+                  --cert=/opt/etcd/ssl/master01-etcd.vagrant.example.pem \
+                  --key=/opt/etcd/ssl/master01-etcd.vagrant.example-key.pem
             ```
          1. List the health of the cluster
             ```bash
-            sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl endpoint --cluster health \
-              --endpoints=https://127.0.0.1:2379 \
-              --cacert=/opt/etcd/ssl/ca.pem \
-              --cert=/opt/etcd/ssl/kube-master01.vagrant.example.pem \
-              --key=/opt/etcd/ssl/kube-master01.vagrant.example-key.pem
+               sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl endpoint --cluster health \
+                  --endpoints=https://127.0.0.1:2379 \
+                  --cacert=/opt/etcd/ssl/ca.pem \
+                  --cert=/opt/etcd/ssl/master01-etcd.vagrant.example.pem \
+                  --key=/opt/etcd/ssl/master01-etcd.vagrant.example-key.pem
             ```
          1. List endpoint status
             ```bash
-            sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl -w table endpoint status \
-              --endpoints=https://127.0.0.1:2379 \
-              --cacert=/opt/etcd/ssl/ca.pem \
-              --cert=/opt/etcd/ssl/kube-master01.vagrant.example.pem \
-              --key=/opt/etcd/ssl/kube-master01.vagrant.example-key.pem
+               sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl -w table endpoint status \
+                  --endpoints=https://127.0.0.1:2379 \
+                  --cacert=/opt/etcd/ssl/ca.pem \
+                  --cert=/opt/etcd/ssl/master01-etcd.vagrant.example.pem \
+                  --key=/opt/etcd/ssl/master01-etcd.vagrant.example-key.pem
             ```
          1. List cluster status
             ```bash
-            sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl -w table endpoint --cluster status \
-              --endpoints=https://127.0.0.1:2379 \
-              --cacert=/opt/etcd/ssl/ca.pem \
-              --cert=/opt/etcd/ssl/kube-master01.vagrant.example.pem \
-              --key=/opt/etcd/ssl/kube-master01.vagrant.example-key.pem
+               sudo -u etcd ETCDCTL_API=3 /opt/etcd/etcd-v3.3.7-linux-amd64/etcdctl -w table endpoint --cluster status \
+                  --endpoints=https://127.0.0.1:2379 \
+                  --cacert=/opt/etcd/ssl/ca.pem \
+                  --cert=/opt/etcd/ssl/master01-etcd.vagrant.example.pem \
+                  --key=/opt/etcd/ssl/master01-etcd.vagrant.example-key.pem
             ```
 1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -K -u vagrant --tags=master` to install the kube-apiserver
    1. prompts triggered by the `ansible-playbook` command
       1. ssh password: `vagrant`
       1. sudo password: `vagrant`
 1. check that the control plane is operational
-   1. `sudo -u kubernetes /opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl get componentstatuses -o=wide --kubeconfig /opt/kubernetes/config/admin.kubeconfig`
+   1. First need to login to one of the master machines
+      1. Change directory to _Kluster_
+      1. Then `vagrant ssh master01`
+   1. Then execute a kubectl command
+      1. `sudo -u kubernetes /opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl get componentstatuses -o=wide --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig`
+         1. should see something like
+         ```text
+            NAME                 STATUS    MESSAGE             ERROR
+            controller-manager   Healthy   ok
+            scheduler            Healthy   ok
+            etcd-0               Healthy   {"health":"true"}
+            etcd-1               Healthy   {"health":"true"}
+            etcd-2               Healthy   {"health":"true"}
+         ```
