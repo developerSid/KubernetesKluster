@@ -78,6 +78,32 @@
       1. Results in
          * master-admin.kubeconfig
          
+### remote admin
+1. The kubectl admin configuration needs to be created for remote use to manage the cluster
+   1. To Generate the configuration using the vagrant setup run the following 4 commands in the `Konfiguration/vagant` directory
+      ```bash
+         kubectl config set-cluster kube-vagrant \
+            --certificate-authority=../../Certificates/vagrant/out/ca.pem \
+            --embed-certs=true \
+            --server=https://192.168.50.10 \
+            --kubeconfig=remote-admin.kubeconfig
+         
+         kubectl config set-credentials admin \
+            --client-certificate=../../Certificates/vagrant/out/admin.pem \
+            --client-key=../../Certificates/vagrant/out/admin-key.pem \
+            --embed-certs=true \
+            --kubeconfig=remote-admin.kubeconfig
+        
+         kubectl config set-context default \
+            --cluster=kube-vagrant \
+            --user=admin \
+            --kubeconfig=remote-admin.kubeconfig
+            
+         kubectl config use-context default --kubeconfig=remote-admin.kubeconfig
+      ```
+      1. Results in
+         * remote-admin.kubeconfig
+         
 ### kubelet (worker nodes)
 1. Setup kubeconfig for each worker node
    1. To Generate the configuration using the vagrant setup run the following 4 commands in the `Konfiguration/vagrant` directory
@@ -132,29 +158,3 @@
       ```
       1. Results in
          * kube-proxy.kubeconfig
-         
-### remote admin
-1. The kubectl admin configuration needs to be created for remote use to manage the cluster
-   1. To Generate the configuration using the vagrant setup run the following 4 commands in the `Konfiguration/vagant` directory
-      ```bash
-         kubectl config set-cluster kube-vagrant \
-            --certificate-authority=../../Certificates/vagrant/out/ca.pem \
-            --embed-certs=true \
-            --server=https://192.168.50.10 \
-            --kubeconfig=remote-admin.kubeconfig
-         
-         kubectl config set-credentials admin \
-            --client-certificate=../../Certificates/vagrant/out/admin.pem \
-            --client-key=../../Certificates/vagrant/out/admin-key.pem \
-            --embed-certs=true \
-            --kubeconfig=remote-admin.kubeconfig
-        
-         kubectl config set-context default \
-            --cluster=kube-vagrant \
-            --user=admin \
-            --kubeconfig=remote-admin.kubeconfig
-            
-         kubectl config use-context default --kubeconfig=remote-admin.kubeconfig
-      ```
-      1. Results in
-         * remote-admin.kubeconfig

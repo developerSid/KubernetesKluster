@@ -69,3 +69,39 @@ kubectl config set-context default \
    --user=admin \
    --kubeconfig=remote-admin.kubeconfig
 kubectl config use-context default --kubeconfig=remote-admin.kubeconfig
+
+### kubelet (worker nodes)
+for instance in worker01 worker02; do
+   kubectl config set-cluster kube-vagrant \
+      --certificate-authority=../../Certificates/vagrant/out/ca.pem \
+      --embed-certs=true \
+      --server=https://192.168.50.10:6443 \
+      --kubeconfig=${instance}.kubeconfig
+   kubectl config set-credentials system:node:${instance} \
+      --client-certificate=../../Certificates/vagrant/out/${instance}.vagrant.example.pem \
+      --client-key=../../Certificates/vagrant/out/${instance}.vagrant.example-key.pem \
+      --embed-certs=true \
+      --kubeconfig=${instance}.kubeconfig
+   kubectl config set-context default \
+      --cluster=kube-vagrant \
+      --user=system:node:${instance} \
+      --kubeconfig=${instance}.kubeconfig
+   kubectl config use-context default --kubeconfig=${instance}.kubeconfig
+done
+
+### kube-proxy
+kubectl config set-cluster kube-vagrant \
+   --certificate-authority=../../Certificates/vagrant/out/ca.pem \
+   --embed-certs=true \
+   --server=https://192.168.50.10:6443 \
+   --kubeconfig=kube-proxy.kubeconfig
+kubectl config set-credentials system:kube-proxy \
+   --client-certificate=../../Certificates/vagrant/out/kube-proxy.pem \
+   --client-key=../../Certificates/vagrant/out/kube-proxy-key.pem \
+   --embed-certs=true \
+   --kubeconfig=kube-proxy.kubeconfig
+kubectl config set-context default \
+   --cluster=kube-vagrant \
+   --user=system:kube-proxy \
+   --kubeconfig=kube-proxy.kubeconfig
+kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
