@@ -69,3 +69,6 @@ has been built is some other way with the inventory updated appropriately)
             etcd-1               Healthy   {"health":"true"}
             etcd-2               Healthy   {"health":"true"}
          ```
+1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -u vagrant --tags=worker` to install all the components for the worker machines
+   1. prompts triggered by the `ansible-playbook` command
+      1. ssh password: `vagrant`

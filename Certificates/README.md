@@ -105,6 +105,25 @@ All the certificates and keys used throughout this setup will use the CA generat
          * admin.pem
          * admin-key.pem
 
+### Create the kubelet certificates and keys
+For the vagrant based example there are only 2 worker nodes since it is intended to run from a single machine so only 2 signing requests have
+been created.  To create more just add more _worker*-csr.json_ files.
+
+* Make sure to set the hosts section appropriately
+
+1. Generate worker01 Key Pair
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/worker01-csr.json | cfssljson -bare worker01.vagrant.example`
+      1. Will Result in
+         * worker01.csr
+         * worker01.pem
+         * worker01-key.pem
+1. Generate worker02 Key Pair
+   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/worker02-csr.json | cfssljson -bare worker02.vagrant.example`
+      1. Will Result in
+         * worker02.csr
+         * worker02.pem
+         * worker02-key.pem
+         
 Notes:
 1. [api server certs doc](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#x509-client-certs)
    * _If a client certificate is presented and verified, the common name of the subject is 

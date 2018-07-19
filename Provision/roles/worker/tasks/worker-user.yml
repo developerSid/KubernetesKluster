@@ -1,0 +1,16 @@
+- name: Ensure group "kubernetes" exists
+  group:
+    name: kubernetes
+    state: present
+
+- name: Create kubernetess user
+  user:
+   name: kubernetes
+   state: present
+   groups:
+     - kubernetes
+     - docker
+   shell: /bin/nologin
+   system: yes
+   createhome: no
+

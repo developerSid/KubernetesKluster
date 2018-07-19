@@ -17,3 +17,8 @@
   become: yes
   roles:
     - { role: load-balancer, tags: ['lb'] }
+
+- hosts: worker
+  become: yes
+  roles:
+    - { role: worker, tags: ['worker'] }

@@ -1,0 +1,6 @@
+- name: upload certs
+  copy: src=../../../../Certificates/{{ clusterName }}/out/{{ item }} dest=/opt/kubernetes/ssl/ owner=kubernetes group=kubernetes mode=0600
+  with_items:
+    - "{{ inventory_hostname }}.{{ clusterDomain }}.pem"
+    - "{{ inventory_hostname }}.{{ clusterDomain }}-key.pem"
+    - ca.pem

@@ -1,0 +1,32 @@
+# used to have a place to put tarballs
+- name: Setup archive directory
+  file:
+    path: /opt/archives
+    state: directory
+
+- name: Setup worker directory structure
+  file:
+    path: /opt/kubernetes/{{ item }}
+    state: directory
+    mode: 0755
+    owner: kubernetes
+    group: kubernetes
+  with_items:
+    - kubernetes-{{ kubernetesVer }}-linux-amd64/bin
+    - kubernetes-{{ kubernetesVer }}-linux-amd64/plugin
+    - log/kubelet
+    - log/kube-proxy
+    - cni
+    - ssl
+    - config
+
+- name: Setup special worker directory structure # there doesn't appear to be flags that control these so they will just be created here
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+    owner: kubernetes
+    group: kubernetes
+  with_items:
+    - /var/lib/kubelet
+    - /var/lib/dockershim
