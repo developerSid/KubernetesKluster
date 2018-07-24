@@ -7,9 +7,10 @@ Requires=docker.service
 [Service]
 ExecStart=/opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/bin/kubelet \
   --cert-dir=/opt/kubernetes/ssl \
+  --cni-bin-dir=/opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/plugin \
+  --cni-conf-dir=/opt/kubernetes/cni \
   --config=/opt/kubernetes/config/kubelet-config.yml \
   --container-runtime=docker \
-  --container-runtime-endpoint=unix:///var/run/dockershim.sock \
   --image-pull-progress-deadline=2m \
   --kubeconfig=/opt/kubernetes/config/{{ inventory_hostname }}.kubeconfig \
   --log-dir=/opt/kubernetes/log/kubelet \
