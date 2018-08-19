@@ -6,17 +6,17 @@
 - hosts: etcd
   become: yes
   roles:
-    - { role: etcd, tags: ['etcd'] }
-
-- hosts: master
-  become: yes
-  roles:
-    - { role: master, tags: ['master'] }
+    - { role: etcd, tags: ['etcd', 'control-plane'] }
 
 - hosts: load-balancer
   become: yes
   roles:
-    - { role: load-balancer, tags: ['lb'] }
+    - { role: load-balancer, tags: ['lb', 'control-plane'] }
+
+- hosts: master
+  become: yes
+  roles:
+    - { role: master, tags: ['master', 'control-plane'] }
 
 - hosts: worker
   become: yes

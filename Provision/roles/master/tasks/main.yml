@@ -2,6 +2,7 @@
 - include: master-tools.yml
 - include: master-directory-structure.yml
 - include: master-certs.yml
+- include: master-files.yml
 - include: master-apiserver.yml
 - include: master-controller-manager.yml
 - include: master-scheduler.yml

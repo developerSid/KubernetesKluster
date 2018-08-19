@@ -1,0 +1,7 @@
+- name: copy kubelet cluster role config files
+  copy:
+    src: "{{ item }}"
+    dest: /opt/kubernetes/config
+  with_items:
+    - kubelet-cluster-role.yml
+    - kubelet-cluster-role-binding.yml
