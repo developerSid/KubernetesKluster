@@ -105,3 +105,17 @@ kubectl config set-context default \
    --user=system:kube-proxy \
    --kubeconfig=kube-proxy.kubeconfig
 kubectl config use-context default --kubeconfig=kube-proxy.kubeconfig
+
+### Configuring kubectl for Remote Access
+kubectl config set-cluster kube-vagrant \
+  --certificate-authority=../../Certificates/vagrant/out/ca.pem \
+  --embed-certs=true \
+  --server=https://192.168.50.10:6443
+kubectl config set-credentials admin \
+  --client-certificate=../../Certificates/vagrant/out/admin.pem \
+  --embed-certs=true \
+  --client-key=../../Certificates/vagrant/out/admin-key.pem
+kubectl config set-context kube-vagrant \
+  --cluster=kube-vagrant \
+  --user=admin
+kubectl config use-context kube-vagrant
