@@ -9,16 +9,16 @@
     - kubelet
     - kubectl
 
-- name: Download CNI plugin tarball
-  get_url:
-    url: https://github.com/containernetworking/plugins/releases/download/{{ cniPluginVer }}/cni-plugins-amd64-{{ cniPluginVer }}.tgz
-    dest: /opt/archives
-
-- name: Extract CNI plugin tarball
-  unarchive:
-    src: "/opt/archives/cni-plugins-amd64-{{ cniPluginVer }}.tgz"
-    dest: "/opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/plugin"
-    remote_src: yes
+#- name: Download CNI plugin tarball
+#  get_url:
+#    url: https://github.com/containernetworking/plugins/releases/download/{{ cniPluginVer }}/cni-plugins-amd64-{{ cniPluginVer }}.tgz
+#    dest: /opt/archives
+#
+#- name: Extract CNI plugin tarball
+#  unarchive:
+#    src: "/opt/archives/cni-plugins-amd64-{{ cniPluginVer }}.tgz"
+#    dest: "/opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/plugin"
+#    remote_src: yes
 
 - name: Upload kubelet kubeconfig
   copy:
@@ -63,3 +63,9 @@
     - 10-bridge.conf
     - 99-loopback.conf
   notify: reload kubelet
+
+- name: enable kubelet service
+  service:
+    name: kubelet
+    state: started
+    enabled: yes
