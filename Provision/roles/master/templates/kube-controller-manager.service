@@ -6,6 +6,7 @@ Documentation=https://github.com/kubernetes/kubernetes
 User=kubernetes
 Group=kubernetes
 ExecStart=/opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/bin/kube-controller-manager \
+  --allocate-node-cidrs=true \
   --bind-address=0.0.0.0 \
   --cert-dir=/opt/kubernetes/ssl/ \
   --cluster-cidr={{ clusterCidr }} \

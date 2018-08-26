@@ -135,3 +135,12 @@ EOF
       1. ssh password: `vagrant`
    1. Once the playbook is finished running need to verify that the cluster is connected
       1. `sudo -u kubernetes /opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl get nodes --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig`
+
+### Install Networking Solution
+```bash
+CLUSTERCIDR=10.200.0.0/16 \
+APISERVER=https://192.168.50.10:6443 \
+sh -c 'curl https://raw.githubusercontent.com/cloudnativelabs/kube-router/master/daemonset/generic-kuberouter-all-features.yaml -o - | \
+sed -e "s;%APISERVER%;$APISERVER;g" -e "s;%CLUSTERCIDR%;$CLUSTERCIDR;g"' | \
+kubectl apply -f -
+```

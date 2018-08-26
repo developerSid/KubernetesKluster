@@ -6,6 +6,7 @@ Requires=docker.service
 
 [Service]
 ExecStart=/opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/bin/kubelet \
+  --allocate-node-cidrs=true \
   --cert-dir=/opt/kubernetes/ssl \
   --cni-bin-dir=/opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/plugin \
   --cni-conf-dir=/opt/kubernetes/cni \
