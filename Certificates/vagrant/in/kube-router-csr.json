@@ -15,7 +15,7 @@
       "C": "US",
       "ST": "CA",
       "L": "San Francisco",
-      "O": "system:nodes",
+      "O": "system:kube-router",
       "OU": "kube-vagrant"
     }
   ]
