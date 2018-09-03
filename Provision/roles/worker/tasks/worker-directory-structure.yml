@@ -16,7 +16,7 @@
     - kubernetes-{{ kubernetesVer }}-linux-amd64/plugin
     - kube-router-{{ kubeRouterVer }}/bin
     - log/kubelet
-    - log/kube-proxy
+    - log/kube-router
     - cni
     - ssl
     - config

@@ -92,12 +92,6 @@ All the certificates and keys used throughout this setup will use the CA generat
          * kube-scheduler.csr
          * kube-scheduler.pem
          * kube-scheduler-key.pem
-1. Generate the kube-proxy Key Pair
-   1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/kube-proxy-csr.json | cfssljson -bare kube-proxy`
-      1. Will Result in
-         * kube-proxy.csr
-         * kube-proxy.pem
-         * kube-proxy-key.pem
 1. Generate the admin Key Pair
    1. `cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/admin-csr.json | cfssljson -bare admin`
       1. Will Result in
@@ -130,6 +124,6 @@ Notes:
    * _If a client certificate is presented and verified, the common name of the subject is 
      used as the user name for the request_
      * The above means that each client cert generated for each kubelet running in the system will
-       need to have a unique common name to help name the actual node.  This is must be why in
+       need to have a unique common name to help name the actual node.  This must be why in
        Kubernetes the Hard Way certs are generated for each node.  Since the CA determines
        if a client is trusted or not.

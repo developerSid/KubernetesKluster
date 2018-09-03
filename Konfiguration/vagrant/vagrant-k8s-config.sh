@@ -95,14 +95,14 @@ kubectl config set-cluster kube-vagrant \
    --embed-certs=true \
    --server=https://192.168.50.10:6443 \
    --kubeconfig=kube-router.kubeconfig
-kubectl config set-credentials system:kube-router \
+kubectl config set-credentials kube-router \
    --client-certificate=../../Certificates/vagrant/out/kube-router.vagrant.example.pem \
    --client-key=../../Certificates/vagrant/out/kube-router.vagrant.example-key.pem \
    --embed-certs=true \
    --kubeconfig=kube-router.kubeconfig
 kubectl config set-context default \
    --cluster=kube-vagrant \
-   --user=system:kube-router \
+   --user=kube-router \
    --kubeconfig=kube-router.kubeconfig
 kubectl config use-context default --kubeconfig=kube-router.kubeconfig
 

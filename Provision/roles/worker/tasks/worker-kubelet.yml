@@ -51,6 +51,7 @@
 - name: Disable swap
   command: swapoff -a
   when: ansible_swaptotal_mb > 0
+  notify: reload kubelet
 
 - name: upload cni config
   template:

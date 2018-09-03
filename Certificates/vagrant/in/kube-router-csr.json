@@ -1,5 +1,5 @@
 {
-  "CN": "system:kube-router",
+  "CN": "kube-router",
   "key": {
     "algo": "rsa",
     "size": 2048
@@ -15,7 +15,7 @@
       "C": "US",
       "ST": "CA",
       "L": "San Francisco",
-      "O": "system:kube-router",
+      "O": "kube-router",
       "OU": "kube-vagrant"
     }
   ]
