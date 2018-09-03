@@ -5,3 +5,5 @@
   with_items:
     - kubelet-cluster-role.yml
     - kubelet-cluster-role-binding.yml
+    - kube-router-cluster-role.yml
+    - kube-router-cluster-role-binding.yml

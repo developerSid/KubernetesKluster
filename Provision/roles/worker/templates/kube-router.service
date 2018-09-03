@@ -1,0 +1,25 @@
+[Unit]
+Description=Cloud Native Labs Kube-Router service
+Documentation=https://www.kube-router.io/docs/user-guide/
+
+[Service]
+ExecStart=/opt/kubernetes/kube-router-{{ kubeRouterVer }}/bin/kube-router \
+  --advertise-pod-cidr=true \
+  --bgp-port=179 \
+  --cluster-cidr={{ clusterCidr }} \
+  --enable-cni=true \
+  --enable-ibgp=true \
+  --enable-overlay=true \
+  --enable-pod-egress=true \
+  --health-port=20244 \
+  --hostname-override={{ inventory_hostname }} \
+  --kubeconfig=/opt/kubernetes/config/kube-router-{{ inventory_hostname }}.kubeconfig \
+  --master={{ loadBalancerIp }} \
+  --run-firewall=true \
+  --run-router=true \
+  --run-service-proxy=true
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

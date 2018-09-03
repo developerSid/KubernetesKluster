@@ -1,0 +1,22 @@
+{
+  "CN": "system:kube-router:worker01",
+  "key": {
+    "algo": "rsa",
+    "size": 2048
+  },
+  "hosts": [
+    "worker01",
+    "worker01.vagrant.example",
+    "192.168.50.20",
+    "127.0.0.1"
+  ],
+  "names": [
+    {
+      "C": "US",
+      "ST": "CA",
+      "L": "San Francisco",
+      "O": "system:nodes",
+      "OU": "kube-vagrant"
+    }
+  ]
+}
