@@ -8,8 +8,8 @@
   with_items:
     - kube-controller-manager
 
-- name: Deploye Kubernetes Controller Manager kubeconfig
-  copy: src=../../../../Konfiguration/{{ clusterName }}/kube-controller-manager.kubeconfig dest=/opt/kubernetes/config/ owner=kubernetes group=kubernetes mode=0600
+- name: Deploy Kubernetes Controller Manager kubeconfig
+  copy: src=../../../../Konfiguration/{{ clusterName }}/out/kube-controller-manager.kubeconfig dest=/opt/kubernetes/config/ owner=kubernetes group=kubernetes mode=0600
 
 - name: Deploy Kubernetes Controller Manager service script
   template: src=kube-controller-manager.service dest=/etc/systemd/system/kube-controller-manager.service

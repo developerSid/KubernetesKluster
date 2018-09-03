@@ -11,12 +11,8 @@ Change to the _Provision_ directory
 
 ### tl:dr
 1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -u vagrant --tags=bootstrap,control-plane`
-1. execute cluster configuration against the master node 
-   1. `ansible master01 -i inventory/vagrant.ini -k -u vagrant -m shell -a "/opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl apply --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig -f /opt/kubernetes/config/kubelet-cluster-role.yml" --become`
-   1. `ansible master01 -i inventory/vagrant.ini -k -u vagrant -m shell -a "/opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl apply --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig -f /opt/kubernetes/config/kubelet-cluster-role-binding.yml" --become`
-   1. `ansible master01 -i inventory/vagrant.ini -k -u vagrant -m shell -a "/opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl apply --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig -f /opt/kubernetes/config/kube-router-cluster-role.yml" --become`
-   1. `ansible master01 -i inventory/vagrant.ini -k -u vagrant -m shell -a "/opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl apply --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig -f /opt/kubernetes/config/kube-router-cluster-role-binding.yml" --become`
-   1. `ansible master01 -i inventory/vagrant.ini -k -u vagrant -m shell -a "/opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl apply --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig -f /opt/kubernetes/config/kube-router-service-account.yml" --become`
+1. execute `kubectl apply -f ../Konfiguration/vagrant/rbac/kubelet-rbac.yml` 
+1. execute `kubectl apply -f ../Konfiguration/vagrant/rbac/kube-router-rbac.yml` 
 1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -u vagrant --tags=worker`
 
 ### longer more detailed way

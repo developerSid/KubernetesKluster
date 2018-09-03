@@ -21,9 +21,9 @@
     owner: kubernetes
     group: kubernetes
 
-- name: Upload kubelet kubeconfig
+- name: Upload kube-router kubeconfig
   copy:
-    src: ../../../../Konfiguration/vagrant/kube-router.kubeconfig
+    src: ../../../../Konfiguration/{{ clusterName }}/out/kube-router.kubeconfig
     dest: /opt/kubernetes/config/kube-router.kubeconfig
     owner: kubernetes
     group: kubernetes

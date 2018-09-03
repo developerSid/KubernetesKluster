@@ -22,7 +22,7 @@
 
 - name: Upload kubelet kubeconfig
   copy:
-    src: ../../../../Konfiguration/vagrant/{{ inventory_hostname }}.kubeconfig
+    src: ../../../../Konfiguration/{{ clusterName }}/out/{{ inventory_hostname }}.kubeconfig
     dest: /opt/kubernetes/config/{{ inventory_hostname }}.kubeconfig
     owner: kubernetes
     group: kubernetes
