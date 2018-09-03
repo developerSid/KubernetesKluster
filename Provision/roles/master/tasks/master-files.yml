@@ -7,3 +7,4 @@
     - kubelet-cluster-role-binding.yml
     - kube-router-cluster-role.yml
     - kube-router-cluster-role-binding.yml
+    - kube-router-service-account.yml
