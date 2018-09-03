@@ -1,4 +1,4 @@
-[Unit]
+   [Unit]
 Description=Cloud Native Labs Kube-Router service
 Documentation=https://www.kube-router.io/docs/user-guide/
 
@@ -13,7 +13,7 @@ ExecStart=/opt/kubernetes/kube-router-{{ kubeRouterVer }}/bin/kube-router \
   --enable-pod-egress=true \
   --health-port=20244 \
   --hostname-override={{ inventory_hostname }} \
-  --kubeconfig=/opt/kubernetes/config/kube-router-{{ inventory_hostname }}.kubeconfig \
+  --kubeconfig=/opt/kubernetes/config/kube-router.kubeconfig \
   --master={{ loadBalancerIp }} \
   --run-firewall=true \
   --run-router=true \

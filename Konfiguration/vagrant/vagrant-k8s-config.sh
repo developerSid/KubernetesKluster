@@ -90,23 +90,21 @@ for instance in worker01 worker02; do
 done
 
 ### kube-router
-for instance in worker01 worker02; do
-   kubectl config set-cluster kube-vagrant \
-      --certificate-authority=../../Certificates/vagrant/out/ca.pem \
-      --embed-certs=true \
-      --server=https://192.168.50.10:6443 \
-      --kubeconfig=kube-router-${instance}.kubeconfig
-   kubectl config set-credentials system:kube-router:${instance} \
-      --client-certificate=../../Certificates/vagrant/out/kube-router-${instance}.vagrant.example.pem \
-      --client-key=../../Certificates/vagrant/out/kube-router-${instance}.vagrant.example-key.pem \
-      --embed-certs=true \
-      --kubeconfig=kube-router-${instance}.kubeconfig
-   kubectl config set-context default \
-      --cluster=kube-vagrant \
-      --user=system:kube-router:${instance} \
-      --kubeconfig=kube-router-${instance}.kubeconfig
-   kubectl config use-context default --kubeconfig=kube-router-${instance}.kubeconfig
-done
+kubectl config set-cluster kube-vagrant \
+   --certificate-authority=../../Certificates/vagrant/out/ca.pem \
+   --embed-certs=true \
+   --server=https://192.168.50.10:6443 \
+   --kubeconfig=kube-router.kubeconfig
+kubectl config set-credentials system:kube-router \
+   --client-certificate=../../Certificates/vagrant/out/kube-router.vagrant.example.pem \
+   --client-key=../../Certificates/vagrant/out/kube-router.vagrant.example-key.pem \
+   --embed-certs=true \
+   --kubeconfig=kube-router.kubeconfig
+kubectl config set-context default \
+   --cluster=kube-vagrant \
+   --user=system:kube-router \
+   --kubeconfig=kube-router.kubeconfig
+kubectl config use-context default --kubeconfig=kube-router.kubeconfig
 
 ### Configuring kubectl for Remote Access
 kubectl config set-cluster kube-vagrant \

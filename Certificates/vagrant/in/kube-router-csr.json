@@ -1,13 +1,13 @@
 {
-  "CN": "system:kube-router:worker02",
+  "CN": "system:kube-router",
   "key": {
     "algo": "rsa",
     "size": 2048
   },
   "hosts": [
-    "worker02",
-    "worker02.vagrant.example",
-    "192.168.50.21",
+    "worker01",
+    "worker01.vagrant.example",
+    "192.168.50.20",
     "127.0.0.1"
   ],
   "names": [

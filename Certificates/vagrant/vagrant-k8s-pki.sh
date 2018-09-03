@@ -16,5 +16,4 @@ cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profil
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/admin-csr.json | cfssljson -bare admin
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/worker01-csr.json | cfssljson -bare worker01.vagrant.example
 cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/worker02-csr.json | cfssljson -bare worker02.vagrant.example
-cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/kube-router-worker01-csr.json | cfssljson -bare kube-router-worker01.vagrant.example
-cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/kube-router-worker02-csr.json | cfssljson -bare kube-router-worker02.vagrant.example
+cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=../in/ca-config.json -profile=kubernetes ../in/kube-router-csr.json | cfssljson -bare kube-router.vagrant.example
