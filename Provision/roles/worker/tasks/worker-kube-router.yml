@@ -23,8 +23,8 @@
 
 - name: Upload kubelet kubeconfig
   copy:
-    src: ../../../../Konfiguration/vagrant/kube-router-{{ inventory_hostname }}.kubeconfig
-    dest: /opt/kubernetes/config/kube-router-{{ inventory_hostname }}.kubeconfig
+    src: ../../../../Konfiguration/vagrant/kube-router.kubeconfig
+    dest: /opt/kubernetes/config/kube-router.kubeconfig
     owner: kubernetes
     group: kubernetes
     mode: 0600
