@@ -17,7 +17,8 @@ Change to the _Provision_ directory
 
 ### longer more detailed way
 1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -u vagrant --tags=bootstrap` to configure the cluster
-   with a uniform set of tools for system administration and other tasks
+   with a uniform set of tools for system administration and other tasks.  If there is something that needs to be on 
+   every system in the cluster add it to the list in this role.
 1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -u vagrant --tags=etcd` to install etcd
    1. prompts triggered by the `ansible-playbook` command
       1. ssh password: `vagrant`

@@ -1,4 +1,4 @@
-   [Unit]
+[Unit]
 Description=Cloud Native Labs Kube-Router service
 Documentation=https://www.kube-router.io/docs/user-guide/
 
@@ -17,7 +17,7 @@ ExecStart=/opt/kubernetes/kube-router-{{ kubeRouterVer }}/bin/kube-router \
   --master={{ loadBalancerIp }} \
   --run-firewall=true \
   --run-router=true \
-  --run-service-proxy=true
+  --run-service-proxy=false
 Restart=on-failure
 RestartSec=5
 

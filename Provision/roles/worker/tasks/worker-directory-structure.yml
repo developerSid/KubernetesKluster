@@ -17,6 +17,7 @@
     - kube-router-{{ kubeRouterVer }}/bin
     - log/kubelet
     - log/kube-router
+    - log/kube-proxy
     - cni
     - ssl
     - config
