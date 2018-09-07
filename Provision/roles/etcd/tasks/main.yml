@@ -1,3 +1,0 @@
-- include: etcd-user.yml
-- include: etcd-download.yml
-- include: etcd-install.yml

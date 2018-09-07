@@ -2,6 +2,3 @@
 - include: worker-docker.yml
 - include: worker-user.yml
 - include: worker-directory-structure.yml
-- include: worker-certs.yml
-- include: worker-kubelet.yml
-- include: worker-kube-proxy.yml
