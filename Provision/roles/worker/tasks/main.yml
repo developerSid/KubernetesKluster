@@ -1,4 +1,0 @@
-- include: worker-tools.yml
-- include: worker-docker.yml
-- include: worker-user.yml
-- include: worker-directory-structure.yml

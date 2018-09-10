@@ -28,3 +28,11 @@
 
 - name: enable docker service
   service: name=docker state=started enabled=yes
+
+- name: Add Kuberentes user to the docker group
+  user:
+    name: kubernetes
+    state: present
+    append: yes
+    groups:
+    - kubernetes

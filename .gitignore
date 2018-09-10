@@ -92,3 +92,5 @@ VMBuild/builds/
 *.pem
 *.kubeconfig
 encryption-config.yml
+*.key
+*.key.pub
