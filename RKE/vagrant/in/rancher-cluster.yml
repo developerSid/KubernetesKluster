@@ -1,22 +1,28 @@
 nodes:
-- address: 192.168.50.11 # hostname or IP to access nodes
-  user: kubernetes # root user (usually 'root')
-  role: [controlplane,etcd] # K8s roles for node
-  ssh_key_path: <PEM_FILE> # path to PEM file
-- address: <IP>
-  user: <USER>
-  role: [controlplane,etcd,worker]
-  ssh_key_path: <PEM_FILE>
-- address: <IP>
-  user: <USER>
-  role: [controlplane,etcd,worker]
-  ssh_key_path: <PEM_FILE>
+  - address: 192.168.50.11 # hostname or IP to access nodes
+    user: kubernetes # root user (usually 'root')
+    role: [controlplane,etcd] # K8s roles for node
+    ssh_key_path: ../../../Certificates/vagrant/out/rke.key.pub # path to PEM file
+  - address: 192.168.50.12
+    user: kubernetes
+    role: [controlplane,etcd]
+    ssh_key_path: ../../../Certificates/vagrant/out/rke.key.pub
+  - address: 192.168.50.13
+    user: kubernetes
+    role: [controlplane,etcd]
+    ssh_key_path: ../../../Certificates/vagrant/out/rke.key.pub
+  - address: 192.168.50.20
+    user: kubernetes
+    role: [worker]
+    ssh_key_path: ../../../Certificates/vagrant/out/rke.key.pub
+  - address: 192.168.50.21
+    user: kubernetes
+    role: [worker]
+    ssh_key_path: ../../../Certificates/vagrant/out/rke.key.pub
 
 services:
   etcd:
-    backup: true
-    creation: 6h
-    retention: 24h
+    backup: false
 
 addons: |-
   ---
