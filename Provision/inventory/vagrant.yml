@@ -20,8 +20,8 @@ worker:
        ansible_host: 192.168.50.21
 
 node:
-  chilren:
-     load-balancer:
+  children:
+     master:
      worker:
 
 vagrant:

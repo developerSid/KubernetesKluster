@@ -1,24 +1,34 @@
 nodes:
-  - address: 192.168.50.11 # hostname or IP to access nodes
-    user: kubernetes # root user (usually 'root')
-    role: [controlplane,etcd] # K8s roles for node
-    ssh_key_path: ../../../Certificates/vagrant/out/rke.key.pub # path to PEM file
-  - address: 192.168.50.12
-    user: kubernetes
-    role: [controlplane,etcd]
-    ssh_key_path: ../../../Certificates/vagrant/out/rke.key.pub
-  - address: 192.168.50.13
-    user: kubernetes
-    role: [controlplane,etcd]
-    ssh_key_path: ../../../Certificates/vagrant/out/rke.key.pub
-  - address: 192.168.50.20
-    user: kubernetes
-    role: [worker]
-    ssh_key_path: ../../../Certificates/vagrant/out/rke.key.pub
-  - address: 192.168.50.21
-    user: kubernetes
-    role: [worker]
-    ssh_key_path: ../../../Certificates/vagrant/out/rke.key.pub
+- address: 192.168.50.11 # hostname or IP to access nodes
+  port: "22"
+  user: kubernetes # root user (usually 'root')
+  docker_socket: /var/run/docker.sock
+  role: [controlplane,etcd] # K8s roles for node
+  ssh_key_path: ${baseProjectDir}/Certificates/vagrant/out/rke.key # path to PEM file
+- address: 192.168.50.12
+  port: "22"
+  user: kubernetes
+  docker_socket: /var/run/docker.sock
+  role: [controlplane,etcd]
+  ssh_key_path: ${baseProjectDir}/Certificates/vagrant/out/rke.key
+- address: 192.168.50.13
+  port: "22"
+  user: kubernetes
+  docker_socket: /var/run/docker.sock
+  role: [controlplane,etcd]
+  ssh_key_path: ${baseProjectDir}/Certificates/vagrant/out/rke.key
+- address: 192.168.50.20
+  port: "22"
+  user: kubernetes
+  docker_socket: /var/run/docker.sock
+  role: [worker]
+  ssh_key_path: ${baseProjectDir}/Certificates/vagrant/out/rke.key
+- address: 192.168.50.21
+  port: "22"
+  user: kubernetes
+  docker_socket: /var/run/docker.sock
+  role: [worker]
+  ssh_key_path: ${baseProjectDir}/Certificates/vagrant/out/rke.key
 
 services:
   etcd:
@@ -101,7 +111,7 @@ addons: |-
       nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"   # Max time in seconds for ws to remain shell window open
   spec:
     rules:
-    - host: <FQDN>  # FQDN to access cattle server
+    - host: 192.168.50.10  # FQDN to access cattle server
       http:
         paths:
         - backend:
@@ -110,7 +120,7 @@ addons: |-
     tls:
     - secretName: cattle-keys-ingress
       hosts:
-      - <FQDN>      # FQDN to access cattle server
+      - 192.168.50.10      # FQDN to access cattle server
   ---
   kind: Deployment
   apiVersion: extensions/v1beta1
@@ -126,14 +136,14 @@ addons: |-
       spec:
         serviceAccountName: cattle-admin
         containers:
-        - image: rancher/rancher:<RANCHER_VERSION>
+        - image: rancher/rancher:v0.1.9
           imagePullPolicy: Always
           name: cattle-server
   #       env:
   #       - name: HTTP_PROXY
-  #         value: "http://your_proxy_address:port"
+  #         value: "http://192.168.50.10:port"
   #       - name: HTTPS_PROXY
-  #         value: "http://your_proxy_address:port"
+  #         value: "http://192.168.50.10:port"
   #       - name: NO_PROXY
   #         value: "localhost,127.0.0.1,0.0.0.0,10.43.0.0/16,your_network_ranges_that_dont_need_proxy_to_access"
           livenessProbe:

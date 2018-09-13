@@ -3,6 +3,11 @@
   roles:
     - { role: bootstrap, tags: ['bootstrap'] }
 
+- hosts: node:master
+  become: yes
+  roles:
+    - { role: docker, tags: ['node', 'master', 'docker'] }
+    
 - hosts: node
   become: yes
   roles:

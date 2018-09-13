@@ -19,6 +19,7 @@
   user:
     name: kubernetes
     state: present
+    append: yes
     groups:
       - kubernetes
 
