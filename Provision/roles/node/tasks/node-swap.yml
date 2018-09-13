@@ -1,6 +1,6 @@
 - name: Remove swapfile from /etc/fstab
   mount:
-    name: swap
+    name: "/dev/mapper/vagrant--vg-swap_1"
     fstype: swap
     state: absent
     
