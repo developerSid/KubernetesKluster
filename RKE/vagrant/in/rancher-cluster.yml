@@ -58,8 +58,8 @@ addons: |-
     namespace: cattle-system
   type: Opaque
   data:
-    tls.crt: ${}  # ssl cert for ingress. If selfsigned, must be signed by same CA as cattle server
-    tls.key: ${}  # ssl key for ingress. If selfsigned, must be signed by same CA as cattle server
+    tls.crt: ${masterCert}  # ssl cert for ingress. If selfsigned, must be signed by same CA as cattle server
+    tls.key: ${masterCertKey}  # ssl key for ingress. If selfsigned, must be signed by same CA as cattle server
   ---
   apiVersion: v1
   kind: Secret
@@ -68,7 +68,7 @@ addons: |-
     namespace: cattle-system
   type: Opaque
   data:
-    cacerts.pem: <BASE64_CA>  # CA cert used to sign cattle server cert and key
+    cacerts.pem: ${caCert}  # CA cert used to sign cattle server cert and key
   ---
   apiVersion: v1
   kind: Service
