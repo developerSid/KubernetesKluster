@@ -1,9 +1,12 @@
-- name: Remove swapfile from /etc/fstab
-  mount:
-    name: "/dev/mapper/vagrant--vg-swap_1"
-    fstype: swap
-    state: absent
-    
 - name: Disable swap
   command: swapoff -a
   when: ansible_swaptotal_mb > 0
+  
+- name: Remove swapfile from /etc/fstab
+  replace:
+    dest: "/etc/fstab"
+    regexp: '(?i)^(^/dev/mapper/.*swap.*)'
+    line: '# \1'
+    backrefs: yes
+    state: present
+  notify: mount all
