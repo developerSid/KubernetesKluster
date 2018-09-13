@@ -3,7 +3,7 @@
   when: ansible_swaptotal_mb > 0
   
 - name: Remove swapfile from /etc/fstab
-  replace:
+  lineinfile:
     dest: "/etc/fstab"
     regexp: '(?i)^(^/dev/mapper/.*swap.*)'
     line: '# \1'
