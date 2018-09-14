@@ -3,6 +3,11 @@
   roles:
     - { role: bootstrap, tags: ['bootstrap'] }
 
+- hosts: load-balancer
+  become: yes
+  roles:
+    - { role: docker, tags: ['load-balancer'] }
+
 - hosts: node:master
   become: yes
   roles:
