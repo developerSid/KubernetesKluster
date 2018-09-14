@@ -6,7 +6,7 @@
 - hosts: load-balancer
   become: yes
   roles:
-    - { role: docker, tags: ['load-balancer'] }
+    - { role: load-balancer, tags: ['load-balancer'] }
 
 - hosts: node:master
   become: yes
