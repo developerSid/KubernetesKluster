@@ -19,6 +19,7 @@ To Learn!
       
 ## Sections
 1. [Build Box](./VMBuild/README.md)
+1. [Setup Certificates](./Certificates/README.md)
 1. [Start Cluster](./Kluster/README.md)
 1. [Install Base Requirements](./Provision/README.md)
 1. [Install Kubernetes](./RKE/README.md)
