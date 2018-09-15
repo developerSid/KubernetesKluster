@@ -9,7 +9,7 @@
     - kube-scheduler
 
 - name: Deploy Kubernetes Scheduler kubeconfig
-  copy: src=../../../../Konfiguration/{{ clusterName }}/kube-scheduler.kubeconfig dest=/opt/kubernetes/config/ owner=kubernetes group=kubernetes mode=0600
+  copy: src=../../../../Konfiguration/{{ clusterName }}/out/kube-scheduler.kubeconfig dest=/opt/kubernetes/config/ owner=kubernetes group=kubernetes mode=0600
 
 - name: Deploy Kubernetes Scheduler yaml config
   copy: src=kube-scheduler.yml dest=/opt/kubernetes/config/ owner=kubernetes group=kubernetes mode=0600

@@ -14,7 +14,9 @@
   with_items:
     - kubernetes-{{ kubernetesVer }}-linux-amd64/bin
     - kubernetes-{{ kubernetesVer }}-linux-amd64/plugin
+    - kube-router-{{ kubeRouterVer }}/bin
     - log/kubelet
+    - log/kube-router
     - log/kube-proxy
     - cni
     - ssl

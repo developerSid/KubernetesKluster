@@ -11,14 +11,14 @@ Change to the _Provision_ directory
 
 ### tl:dr
 1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -u vagrant --tags=bootstrap,control-plane`
-1. execute cluster configuration against the master node 
-   1. `ansible master01 -i inventory/vagrant.ini -k -u vagrant -m shell -a "/opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl apply --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig -f /opt/kubernetes/config/kubelet-cluster-role.yml" --become`
-   1. `ansible master01 -i inventory/vagrant.ini -k -u vagrant -m shell -a "/opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl apply --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig -f /opt/kubernetes/config/kubelet-cluster-role-binding.yml" --become`
+1. execute `kubectl apply -f ../Konfiguration/vagrant/rbac/kubelet-rbac.yml` 
+1. execute `kubectl apply -f ../Konfiguration/vagrant/rbac/kube-router-rbac.yml` 
 1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -u vagrant --tags=worker`
 
 ### longer more detailed way
 1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -u vagrant --tags=bootstrap` to configure the cluster
-   with a uniform set of tools for system administration and other tasks
+   with a uniform set of tools for system administration and other tasks.  If there is something that needs to be on 
+   every system in the cluster add it to the list in this role.
 1. execute `ansible-playbook -i inventory/vagrant.ini site.yml -k -u vagrant --tags=etcd` to install etcd
    1. prompts triggered by the `ansible-playbook` command
       1. ssh password: `vagrant`
@@ -135,3 +135,31 @@ EOF
       1. ssh password: `vagrant`
    1. Once the playbook is finished running need to verify that the cluster is connected
       1. `sudo -u kubernetes /opt/kubernetes/kubernetes-v1.10.4-linux-amd64/bin/kubectl get nodes --kubeconfig /opt/kubernetes/config/master-admin.kubeconfig`
+1. Check workers
+   1. `kubectl get componentstatuses`
+      1. ```
+         NAME                 STATUS    MESSAGE             ERROR
+         scheduler            Healthy   ok
+         controller-manager   Healthy   ok
+         etcd-0               Healthy   {"health":"true"}
+         etcd-2               Healthy   {"health":"true"}
+         etcd-1               Healthy   {"health":"true"}
+         ```
+   1. `kubectl get nodes`
+      1. ```
+         NAME       STATUS    ROLES     AGE       VERSION
+         worker01   Ready     <none>    43s       v1.10.4
+         worker02   Ready     <none>    43s       v1.10.4
+         ```
+
+### Install Networking Solution
+1. TODO: Need to see how to configure the cluster to allow kube-router to run
+   1. pods didn't start for an as yet unknown reason
+1. Install the kube-router daemonset on the cluster
+   1. ```bash
+      CLUSTERCIDR=10.200.0.0/16 \
+      APISERVER=https://192.168.50.10:6443 \
+      sh -c 'curl https://raw.githubusercontent.com/cloudnativelabs/kube-router/master/daemonset/generic-kuberouter-all-features.yaml -o - | \
+      sed -e "s;%APISERVER%;$APISERVER;g" -e "s;%CLUSTERCIDR%;$CLUSTERCIDR;g"' | \
+      kubectl apply -f -
+      ```

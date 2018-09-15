@@ -9,20 +9,20 @@
     - kubelet
     - kubectl
 
-#- name: Download CNI plugin tarball
-#  get_url:
-#    url: https://github.com/containernetworking/plugins/releases/download/{{ cniPluginVer }}/cni-plugins-amd64-{{ cniPluginVer }}.tgz
-#    dest: /opt/archives
-#
-#- name: Extract CNI plugin tarball
-#  unarchive:
-#    src: "/opt/archives/cni-plugins-amd64-{{ cniPluginVer }}.tgz"
-#    dest: "/opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/plugin"
-#    remote_src: yes
+- name: Download CNI plugin tarball
+  get_url:
+    url: https://github.com/containernetworking/plugins/releases/download/{{ cniPluginVer }}/cni-plugins-amd64-{{ cniPluginVer }}.tgz
+    dest: /opt/archives
+
+- name: Extract CNI plugin tarball
+  unarchive:
+    src: "/opt/archives/cni-plugins-amd64-{{ cniPluginVer }}.tgz"
+    dest: "/opt/kubernetes/kubernetes-{{ kubernetesVer }}-linux-amd64/plugin"
+    remote_src: yes
 
 - name: Upload kubelet kubeconfig
   copy:
-    src: ../../../../Konfiguration/vagrant/{{ inventory_hostname }}.kubeconfig
+    src: ../../../../Konfiguration/{{ clusterName }}/out/{{ inventory_hostname }}.kubeconfig
     dest: /opt/kubernetes/config/{{ inventory_hostname }}.kubeconfig
     owner: kubernetes
     group: kubernetes
@@ -51,6 +51,7 @@
 - name: Disable swap
   command: swapoff -a
   when: ansible_swaptotal_mb > 0
+  notify: reload kubelet
 
 - name: upload cni config
   template:

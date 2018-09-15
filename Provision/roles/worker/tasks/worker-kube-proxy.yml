@@ -10,7 +10,7 @@
 
 - name: Upload kube-proxy.kubeconfig
   copy:
-    src: ../../../../Konfiguration/vagrant/kube-proxy.kubeconfig
+    src: ../../../../Konfiguration/{{ clusterName }}/out/kube-proxy.kubeconfig
     dest: /opt/kubernetes/config/kube-proxy.kubeconfig
     mode: 0600
     owner: kubernetes
