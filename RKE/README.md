@@ -59,6 +59,6 @@ Once you have you can now issue `kubectl` commands to the cluster
    ```
 
 ### Global configuration
-The *kube_config_cluster.yml* can copied placed in *~/.kube/config*.  Make sure the *~/.kube/* directory has been created.
+The *kube_config_cluster.yml* can copied and renamed to *~/.kube/config*.  Make sure the *~/.kube/* directory has been created.
 TODO: Need to look if there is a more elegant way of handling this via `kubectl` since this overwrites any other `kubectl` configurations that may 
       already be setup
