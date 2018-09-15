@@ -1,0 +1,3 @@
+clusterName: vagrantsixnode
+dockerVersion: 17.03.1~ce-0~ubuntu-xenial
+loadBalancerIp: 192.168.50.10

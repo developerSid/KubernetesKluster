@@ -114,4 +114,4 @@ encryption-config.yml
 *.key
 *.key.pub
 
-RKE/vagrant/out/
+RKE/**/out/
