@@ -8,7 +8,7 @@ To Learn!
 ## Tools you will need
 1. [Virtualbox](https://www.virtualbox.org)
    1. Since I'm using Vagrant, and VirtualBox has the best support for most things this is the easy place to start.
-      I will make an effort later to support other hypervisors.
+      Someday I would like to support other hypervisors, hopefully I get that done ...
 1. [Packer](https://www.packer.io)
    1. This used for building an Ubuntu box to be imported into the Vagrant managed VMs that will make up my test cluster
    1. Double check that the verison of VirtualBox installed is supported by Packer.  I've had issues in with newer 
@@ -20,10 +20,10 @@ To Learn!
       
 ## Sections
 1. [Build Box](./VMBuild/README.md)
+1. [Setup Certificates](./Certificates/README.md)
 1. [Start Cluster](./Kluster/README.md)
-1. [Generate Certificates](./Certificates/README.md)
-1. [Generate Kube Configs](./Konfiguration/README.md)
-1. [Install Components](./Provision/README.md)
+1. [Install Base Requirements](./Provision/README.md)
+1. [Install Kubernetes](./RKE/README.md)
 
 
 ## Further reading

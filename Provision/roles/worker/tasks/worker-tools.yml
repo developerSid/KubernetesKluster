@@ -1,8 +1,0 @@
-- name: install default tools
-  apt:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - socat
-    - conntrack
-    - ipset

@@ -1,9 +1,0 @@
-etcdVer: v3.3.7
-kubernetesVer: v1.10.4
-clusterName: vagrant
-clusterDomain: vagrant.example
-clusterCidr: 10.200.0.0/16
-cniPluginVer: v0.6.0
-serviceClusterIpRange: 10.32.0.0/24
-loadBalancerIp: 192.168.50.10
-kubeRouterVer: 0.2.0

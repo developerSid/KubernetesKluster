@@ -3,22 +3,17 @@
   roles:
     - { role: bootstrap, tags: ['bootstrap'] }
 
-- hosts: etcd
-  become: yes
-  roles:
-    - { role: etcd, tags: ['etcd', 'control-plane'] }
-
 - hosts: load-balancer
   become: yes
   roles:
-    - { role: load-balancer, tags: ['lb', 'control-plane'] }
+    - { role: load-balancer, tags: ['load-balancer'] }
 
-- hosts: master
+- hosts: node:master
   become: yes
   roles:
-    - { role: master, tags: ['master', 'control-plane'] }
-
-- hosts: worker
+    - { role: docker, tags: ['node', 'master', 'docker'] }
+    
+- hosts: node
   become: yes
   roles:
-    - { role: worker, tags: ['worker'] }
+    - { role: node, tags: ['node'] }

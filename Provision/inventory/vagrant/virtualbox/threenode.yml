@@ -1,0 +1,24 @@
+load-balancer:
+  hosts:
+    lb01:
+      ansible_host: 192.168.50.10
+
+master:
+  hosts:
+    master01:
+      ansible_host: 192.168.50.11
+
+worker:
+   hosts:
+     worker01:
+       ansible_host: 192.168.50.20
+
+node:
+  children:
+     master:
+     worker:
+
+vagrantthreenode:
+  children:
+    load-balancer:
+    node:

@@ -1,6 +1,0 @@
-- name: copy kubelet cluster role config files
-  copy:
-    src: "{{ item }}"
-    dest: /opt/kubernetes/config
-  with_items:
-    - kube-scheduler.yml

@@ -9,3 +9,22 @@
     - vim
     - tree
     - htop
+
+- name: Ensure group "kubernetes" exists
+  group:
+    name: kubernetes
+    state: present
+
+- name: Create kubernetess user
+  user:
+    name: kubernetes
+    state: present
+    append: yes
+    groups:
+      - kubernetes
+
+- name: Set authorized key for the kubernetes user
+  authorized_key:
+    user: kubernetes
+    state: present
+    key: "{{ lookup('file', '../../../../Certificates/vagrant/out/rke.key.pub') }}"
