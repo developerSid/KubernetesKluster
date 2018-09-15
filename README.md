@@ -1,4 +1,5 @@
 # Kubernetes for cheapskates like me
+(NOTE: This cluster doesn't for for an unknown reason when attempting to setup kube-router, a shift was made to use RKE after this point)
 ## Setup a Self Hosted Kubernetes cluster _(for learning)_ 
 
 ## Why?
