@@ -57,7 +57,13 @@ Once you have you can now issue `kubectl` commands to the cluster
    kube-system     rke-metrics-addon-deploy-job-8f7sb        0/1       Completed   0          15m
    kube-system     rke-network-plugin-deploy-job-5zrxt       0/1       Completed   0          15m
    ```
-
+1. `kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml --kubeconfig kube_config_cluster.yml`
+   1. install kubernetes dashboard
+1. `kubectl apply -f https://gist.githubusercontent.com/superseb/499f2caa2637c404af41cfb7e5f4a938/raw/930841ac00653fdff8beca61dab9a20bb8983782/k8s-dashboard-user.yml --kubeconfig kube_config_cluster.yml`
+   1. create a user
+1. `kubectl proxy --kubeconfig kube_config_cluster.yml`
+   1. sets up a proxy for connecting to dashboard
+   1. [Kube Dashboard](http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/)
 ### Global configuration
 The *kube_config_cluster.yml* can copied and renamed to *~/.kube/config*.  Make sure the *~/.kube/* directory has been created.
 TODO: Need to look if there is a more elegant way of handling this via `kubectl` since this overwrites any other `kubectl` configurations that may 
